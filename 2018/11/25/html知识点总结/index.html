@@ -388,8 +388,15 @@
 <li>有利于SEO，搜索引擎根据标签来确定上下文和各个关键字的权重。</li>
 <li>方便其他设备解析，如盲人阅读器根据语义渲染网页</li>
 </ul>
-<h3 id="2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前"><a href="#2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前" class="headerlink" title="2. CSS 的&lt;link&gt;标签放在&lt;head&gt;&lt;/head&gt;之间？ JS 的&lt;script&gt;标签放在&lt;/body&gt;之前"></a>2. CSS 的<code>&lt;link&gt;</code>标签放在<code>&lt;head&gt;&lt;/head&gt;</code>之间？ JS 的<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前</h3><p>###3.Reflow和Repaint（重绘和重排）</p>
-<ul>
+<h3 id="2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前"><a href="#2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前" class="headerlink" title="2. CSS 的&lt;link&gt;标签放在&lt;head&gt;&lt;/head&gt;之间？ JS 的&lt;script&gt;标签放在&lt;/body&gt;之前"></a>2. CSS 的<code>&lt;link&gt;</code>标签放在<code>&lt;head&gt;&lt;/head&gt;</code>之间？ JS 的<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前</h3><ul>
+<li><p>把<code>&lt;link&gt;</code>放在 <code>&lt;head&gt;</code>中</p>
+<p>这种做法可以让页面逐步呈现，提高了用户体验。如果将样式表放在文档底部附近，会使许多浏览器（包括 Internet Explorer）不能逐步呈现页面。并且link会阻止页面渲染但是不会组织页面的加载。</p>
+</li>
+<li><p>把<code>&lt;script&gt;</code>标签恰好放在<code>&lt;/body&gt;</code>之前 </p>
+<p>脚本在下载和执行期间会阻止 HTML 解析。把<code>&lt;script&gt;</code>标签放在底部，保证 HTML 首先完成解析，将页面尽早呈现给用户。</p>
+</li>
+</ul>
+<h3 id="3-Reflow和Repaint（重绘和重排）"><a href="#3-Reflow和Repaint（重绘和重排）" class="headerlink" title="3.Reflow和Repaint（重绘和重排）"></a>3.Reflow和Repaint（重绘和重排）</h3><ul>
 <li><p>Reflow：当涉及到DOM节点的布局属性发生变化时，就会重新计算该属性，浏览器会重新描绘相应的元素，此过程叫Reflow（回流或重排）。</p>
 </li>
 <li><p>Repaint：当影响DOM元素可见性的属性发生变化 (如 color) 时, 浏览器会重新描绘相应的元素, 此过程称为Repaint（重绘）。因此重排必然会引起重绘。</p>
