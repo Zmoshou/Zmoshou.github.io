@@ -389,8 +389,9 @@
 <li>方便其他设备解析，如盲人阅读器根据语义渲染网页</li>
 </ul>
 <h3 id="2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前"><a href="#2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前" class="headerlink" title="2. CSS 的&lt;link&gt;标签放在&lt;head&gt;&lt;/head&gt;之间？ JS 的&lt;script&gt;标签放在&lt;/body&gt;之前"></a>2. CSS 的<code>&lt;link&gt;</code>标签放在<code>&lt;head&gt;&lt;/head&gt;</code>之间？ JS 的<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前</h3><ul>
-<li>把<link>放在<head><meta name="generator" content="Hexo 3.9.0">中<br>这种做法可以让页面逐步呈现，提高了用户体验。如果将样式表放在文档底部附近，会使许多浏览器（包括 Internet Explorer）不能逐步呈现页面。并且link会阻止页面渲染但是不会组织页面的加载。</head></li>
-<li>把<script>标签恰好放在</body>之前<br>脚本在下载和执行期间会阻止 HTML 解析。把<script>标签放在底部，保证 HTML 首先完成解析，将页面尽早呈现给用户。</li>
+<li>把<code>&lt;link&gt;</code>放在 <code>&lt;head&gt;</code>中</li>
+<li>这种做法可以让页面逐步呈现，提高了用户体验。如果将样式表放在文档底部附近，会使许多浏览器（包括 Internet Explorer）不能逐步呈现页面。并且link会阻止页面渲染但是不会组织页面的加载。</li>
+<li>把<code>&lt;script&gt;</code>标签恰好放在<code>&lt;/body&gt;</code>之前<br>脚本在下载和执行期间会阻止 HTML 解析。把``<script>标签放在底部，保证 HTML 首先完成解析，将页面尽早呈现给用户。</li>
 </ul>
 <p>###3.Reflow和Repaint（重绘和重排）</p>
 <ul>
