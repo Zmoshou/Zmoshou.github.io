@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-21T11:36:51.989Z</updated>
+  <updated>2020-01-21T11:38:13.075Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/12/02/css%E7%9F%A5%E8%AF%86%E7%82%B9%E5%B0%8F%E7%BB%93-1/"/>
     <id>http://yoursite.com/2018/12/02/css知识点小结-1/</id>
     <published>2018-12-02T11:30:10.000Z</published>
-    <updated>2020-01-21T11:36:51.989Z</updated>
+    <updated>2020-01-21T11:38:13.075Z</updated>
     
-    <content type="html"><![CDATA[<p>#html知识点小结</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="css知识点小结-1"><a href="#css知识点小结-1" class="headerlink" title="css知识点小结(1)"></a>css知识点小结(1)</h2>]]></content>
     
     <summary type="html">
     
@@ -45,7 +45,7 @@
     <link href="http://yoursite.com/2018/11/25/html%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2018/11/25/html知识点总结/</id>
     <published>2018-11-25T12:15:50.000Z</published>
-    <updated>2020-01-21T11:36:17.722Z</updated>
+    <updated>2020-01-21T11:38:17.418Z</updated>
     
     <content type="html"><![CDATA[<h2 id="html知识点小结"><a href="#html知识点小结" class="headerlink" title="html知识点小结##"></a>html知识点小结##</h2><h3 id="1-语义化标签"><a href="#1-语义化标签" class="headerlink" title="1.语义化标签"></a>1.语义化标签</h3><p>简单的来说就是用正确的标签做正确的事情。</p><p>优点：</p><ul><li>见名知意，可读性好，方便代码的开发和维护。</li><li>有利于SEO，搜索引擎根据标签来确定上下文和各个关键字的权重。</li><li>方便其他设备解析，如盲人阅读器根据语义渲染网页</li></ul><h3 id="2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前"><a href="#2-CSS-的-lt-link-gt-标签放在-lt-head-gt-lt-head-gt-之间？-JS-的-lt-script-gt-标签放在-lt-body-gt-之前" class="headerlink" title="2. CSS 的&lt;link&gt;标签放在&lt;head&gt;&lt;/head&gt;之间？ JS 的&lt;script&gt;标签放在&lt;/body&gt;之前"></a>2. CSS 的<code>&lt;link&gt;</code>标签放在<code>&lt;head&gt;&lt;/head&gt;</code>之间？ JS 的<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前</h3><ul><li><p>把<code>&lt;link&gt;</code>放在 <code>&lt;head&gt;</code>中</p><p>这种做法可以让页面逐步呈现，提高了用户体验。如果将样式表放在文档底部附近，会使许多浏览器（包括 Internet Explorer）不能逐步呈现页面。并且link会阻止页面渲染但是不会组织页面的加载。</p></li><li><p>把<code>&lt;script&gt;</code>标签恰好放在<code>&lt;/body&gt;</code>之前 </p><p>脚本在下载和执行期间会阻止 HTML 解析。把<code>&lt;script&gt;</code>标签放在底部，保证 HTML 首先完成解析，将页面尽早呈现给用户。</p></li></ul><h3 id="3-Reflow和Repaint（重绘和重排）"><a href="#3-Reflow和Repaint（重绘和重排）" class="headerlink" title="3.Reflow和Repaint（重绘和重排）"></a>3.Reflow和Repaint（重绘和重排）</h3><ul><li><p>Reflow：当涉及到DOM节点的布局属性发生变化时，就会重新计算该属性，浏览器会重新描绘相应的元素，此过程叫Reflow（回流或重排）。</p></li><li><p>Repaint：当影响DOM元素可见性的属性发生变化 (如 color) 时, 浏览器会重新描绘相应的元素, 此过程称为Repaint（重绘）。因此重排必然会引起重绘。</p><p>1- 调整窗口大小<br>2- 字体大小<br>3- 样式表变动<br>4- 元素内容变化，尤其是输入控件<br>5- CSS伪类激活，在用户交互过程中发生<br>6- DOM操作，DOM元素增删、修改<br>7- width, clientWidth, scrollTop等布局宽高的计算</p><p>Repaint和Reflow是不可避免的，只能说对性能的影响减到最小，给出下面几条建议：<br>1- 避免逐条更改样式。建议集中修改样式，例如操作className。<br>2- 避免频繁操作DOM。创建一个documentFragment或div，在它上面应用所有DOM操作，最后添加到文档里。设置      display:none的元素上操作，最后显示出来。<br>3- 避免频繁读取元素几何属性（例如scrollTop）。绝对定位具有复杂动画的元素。<br>4- 绝对定位使它脱离文档流，避免引起父元素及后续元素大量的回流</p></li></ul><h3 id="4-href和src区别"><a href="#4-href和src区别" class="headerlink" title="4.href和src区别"></a>4.href和src区别</h3><p><strong>它们之间的主要区别可以用这样一句话来概括：src用于替代这个元素，而href用于建立这个标签与外部资源之间的关系。</strong></p><ul><li>href<br>href标识超文本引用，用在link和a等元素上，href是引用和页面关联，是在当前元素和引用资源之间建立联系<br>若在文档中添加href ，浏览器会识别该文档为 CSS 文件，就会并行下载资源并且不会停止对当前文档的处理。这也是为什么建议使用 link 方式加载 CSS，而不是使用 @import 方式。</li><li>src<br>src表示引用资源，替换当前元素，用在img，script，iframe上，src是页面内容不可缺少的一部分。<br><br>当浏览器解析到src ，会暂停其他资源的下载和处理，直到将该资源加载、编译、执行完毕，图片和框架等也如此，类似于将所指向资源应用到当前内容。这也是为什么建议把 js 脚本放在底部而不是头部的原因。</li></ul><p>使用场景</p><ul><li>引用css文件时：<code>href=&quot;cssfile.css&quot;</code></li><li>引用js文件时：<code>src=&quot;myscript.js&quot;</code></li><li>引用图片：<code>src=&quot;mypic.jpg&quot;</code></li><li>网站链接：<code>href=&quot;http://www.webpage.com&quot;</code></li></ul><h3 id="5-浏览器的渲染过程"><a href="#5-浏览器的渲染过程" class="headerlink" title="5.浏览器的渲染过程"></a>5.浏览器的渲染过程</h3><ol><li>解析HTML生成DOM树。</li><li>解析CSS生成CSSOM规则树。</li><li>将DOM树与CSSOM规则树合并在一起生成渲染树。</li><li>遍历渲染树开始布局，计算每个节点的位置大小信息。</li><li>将渲染树每个节点绘制到屏幕。</li></ol><h3 id="6-doctype有什么用"><a href="#6-doctype有什么用" class="headerlink" title="6.doctype有什么用"></a>6.doctype有什么用</h3><p>DOCTYPE是document type的简写，它并不是 HTML 标签，也没有结束标签，它是一种标记语言的文档类型声明，即告诉浏览器当前 HTML 是用什么版本编写的。</p><p>1.告知浏览器文档使用哪种 HTML 或 XHTML 规范。</p><p>2.告诉浏览器按照何种规范解析页（如果你的页面没有DOCTYPE的声明，那么浏览器会进入Quirks模式）</p><h3 id="7-优化图片加载的方法"><a href="#7-优化图片加载的方法" class="headerlink" title="7.优化图片加载的方法"></a>7.优化图片加载的方法</h3><ol><li>图片懒加载。</li><li>使用icon和精灵图技术。</li><li>使用其他服务器单独存放图片。</li><li>如果图片过大，可以使用特殊编码的图片（base64编码）</li></ol><h3 id="8-常见的浏览器内核有哪些"><a href="#8-常见的浏览器内核有哪些" class="headerlink" title="8.常见的浏览器内核有哪些"></a>8.常见的浏览器内核有哪些</h3><p>Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]</p><p>Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等</p><p>Presto内核：Opera7及以上。     [Opera内核原为：Presto，现为：Blink;]</p><p>Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]</p><h3 id="9-SEO中的TDK"><a href="#9-SEO中的TDK" class="headerlink" title="9.SEO中的TDK"></a>9.SEO中的TDK</h3><p>网页标题(title)：用于告诉用户和搜索引擎当前页面的核心内容，title是搜索引擎根据用户检索关键词进行排名的核心指标，一般标题中含有搜索的关键词才能获得较好的排名;</p><p>页面描述(description)：显示在搜索结果中，以百度为例如下图，用于告知用户网站页面的主要内容，作为引导用户点击的索引;</p><p>页面关键词(keywords)：告诉搜索引擎当前页面内容的关键词，用户无论在搜索结果还是浏览页面时都看不到页面关键词。</p><p><img src="/.com//html%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93%5Ctdk.jpg" alt></p><p><img src="/.com//html%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93%5Ctdk2.jpg" alt></p>]]></content>
     
