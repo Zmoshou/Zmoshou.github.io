@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Moshou</title>
+  <title itemprop="name">前端兼容性问题小结 | Moshou</title>
   
     <link rel="shortcut icon" href="/images/favicon.ico">
   
@@ -345,245 +345,142 @@
   </div>
 </header>
 
-      <div class="blank" style="padding-top: 0px;"></div>
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://s2.ax1x.com/2020/01/23/1ELyMn.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/23/1ELyMn.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      前端兼容性问题小结</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+          </a>
+        </span>
+        <span>
+          <a href="">默兽</a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2018-12-21<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
 <div id="content" class="site-content">
-  
-  <!-- <div class="top-feature-row">
-  <h1 class="fes-title" style="font-family: 'Ubuntu', sans-serif;">
-  <i class="fa fa-anchor" aria-hidden="true">
-  </i>
-  START:DASH!!</h1>
-  
-</div> -->
   <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
-      <h1 class="main-title" style="font-family: 'Ubuntu', sans-serif;">
-      <i class="fa fa-envira" aria-hidden="true"></i>
-      Discovery</h1>
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="前端兼容性问题小结"><a href="#前端兼容性问题小结" class="headerlink" title="前端兼容性问题小结"></a>前端兼容性问题小结</h2><h3 id="1-不同浏览器的标签默认的外补丁和内补丁不同"><a href="#1-不同浏览器的标签默认的外补丁和内补丁不同" class="headerlink" title="1.不同浏览器的标签默认的外补丁和内补丁不同"></a>1.不同浏览器的标签默认的外补丁和内补丁不同</h3><p>问题症状：随便写几个标签，不加样式控制的情况下，各自的margin 和padding差异较大。</p>
+<p>碰到频率:100%</p>
+<p>解决方案：CSS里    *{margin:0;padding:0;}，或使用第三方css文件重置。</p>
+<p>备注：这个是最常见的也是最易解决的一个浏览器兼容性问题，几乎所有的CSS文件开头都会用通配符*来设置各个标签的内外补丁是0。</p>
+<h3 id="2-图片默认有间距"><a href="#2-图片默认有间距" class="headerlink" title="2.图片默认有间距"></a>2.图片默认有间距</h3><p>问题症状：几个img标签放在一起的时候，有些浏览器会有默认的间距，加了问题一中提到的通配符也不起作用。</p>
+<p>碰到几率：20%</p>
+<p>解决方案：使用float属性为img布局</p>
+<p>备注：因为img标签是行内属性标签，所以只要不超出容器宽度，img标签都会排在一行里，但是部分浏览器的img标签之间会有个间距。去掉这个间距使用float是正道。（我的一个学生使用负margin，虽然能解决，但负margin本身就是容易引起浏览器兼容问题的用法，所以我禁止他们使用）</p>
+<p>###3.IE9一下浏览器不能使用opacity</p>
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opacity: 0.5;</span><br><span class="line">filter:alpha(opacity = 50);</span><br><span class="line">filter: progid:DXImageTransform.Microsoft.Alpha(style = 0, opacity = 50);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-IE6-背景闪烁的问题"><a href="#4-IE6-背景闪烁的问题" class="headerlink" title="4.IE6 背景闪烁的问题"></a>4.IE6 背景闪烁的问题</h3><p>问题：链接、按钮用 <code>CSSsprites</code> 作为背景，在 <code>ie6</code> 下会有背景图闪烁的现象。原因是 <code>IE6</code> 没有将背景图缓存，每次触发 <code>hover</code> 的时候都会重新加载</p>
+<p>解决：可以用 <code>JavaScript</code> 设置 <code>ie6</code> 缓存这些图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.execCommand(&quot;BackgroundImageCache&quot;, false, true);</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-键盘事件-keyCode-兼容性写法"><a href="#5-键盘事件-keyCode-兼容性写法" class="headerlink" title="5.键盘事件 keyCode 兼容性写法"></a>5.键盘事件 <code>keyCode</code> 兼容性写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var inp = document.getElementById(&apos;inp&apos;)</span><br><span class="line">var result = document.getElementById(&apos;result&apos;)</span><br><span class="line"></span><br><span class="line">function getKeyCode(e) &#123;</span><br><span class="line">  e = e ? e : (window.event ? window.event : &quot;&quot;)</span><br><span class="line">  return e.keyCode ? e.keyCode : e.which</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inp.onkeypress = function(e) &#123;</span><br><span class="line">  result.innerHTML = getKeyCode(e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-DOM-事件处理程序的兼容写法"><a href="#6-DOM-事件处理程序的兼容写法" class="headerlink" title="6.DOM 事件处理程序的兼容写法"></a>6.DOM 事件处理程序的兼容写法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">var eventshiv = &#123;</span><br><span class="line">    // event兼容</span><br><span class="line">    getEvent: function(event) &#123;</span><br><span class="line">        return event ? event : window.event;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">// &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;兼容</span><br><span class="line">getType: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(event) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-built_in&quot;&gt;return&lt;/span&gt; event.type;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// target兼容</span><br><span class="line">getTarget: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(event) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-built_in&quot;&gt;return&lt;/span&gt; event.target ? event.target : event.srcelem;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// 添加事件句柄</span><br><span class="line">addHandler: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(elem, &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (elem.addEventListener) &#123;</span><br><span class="line">        elem.addEventListener(&lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener, &lt;span class=&quot;hljs-literal&quot;&gt;false&lt;/span&gt;);</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (elem.attachEvent) &#123;</span><br><span class="line">        elem.attachEvent(&lt;span class=&quot;hljs-string&quot;&gt;&apos;on&apos;&lt;/span&gt; + &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener);</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &#123;</span><br><span class="line">        // 在这里由于.与&lt;span class=&quot;hljs-string&quot;&gt;&apos;on&apos;&lt;/span&gt;字符串不能链接，只能用 []</span><br><span class="line">        elem[&lt;span class=&quot;hljs-string&quot;&gt;&apos;on&apos;&lt;/span&gt; + &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;] = listener;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// 移除事件句柄</span><br><span class="line">removeHandler: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(elem, &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (elem.removeEventListener) &#123;</span><br><span class="line">        elem.removeEventListener(&lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener, &lt;span class=&quot;hljs-literal&quot;&gt;false&lt;/span&gt;);</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (elem.detachEvent) &#123;</span><br><span class="line">        elem.detachEvent(&lt;span class=&quot;hljs-string&quot;&gt;&apos;on&apos;&lt;/span&gt; + &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, listener);</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &#123;</span><br><span class="line">        elem[&lt;span class=&quot;hljs-string&quot;&gt;&apos;on&apos;&lt;/span&gt; + &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;] = null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// 添加事件代理</span><br><span class="line">addAgent: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (elem, &lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, agent, listener) &#123;</span><br><span class="line">    elem.addEventListener(&lt;span class=&quot;hljs-built_in&quot;&gt;type&lt;/span&gt;, &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; (e) &#123;</span><br><span class="line">        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (e.target.matches(agent)) &#123;</span><br><span class="line">            listener.call(e.target, e); // this 指向 e.target</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// 取消默认行为</span><br><span class="line">preventDefault: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(event) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (event.preventDefault) &#123;</span><br><span class="line">        event.preventDefault();</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &#123;</span><br><span class="line">        event.returnValue = &lt;span class=&quot;hljs-literal&quot;&gt;false&lt;/span&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">// 阻止事件冒泡</span><br><span class="line">stopPropagation: &lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt;(event) &#123;</span><br><span class="line">    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; (event.stopPropagation) &#123;</span><br><span class="line">        event.stopPropagation();</span><br><span class="line">    &#125; &lt;span class=&quot;hljs-keyword&quot;&gt;else&lt;/span&gt; &#123;</span><br><span class="line">        event.cancelBubble = &lt;span class=&quot;hljs-literal&quot;&gt;true&lt;/span&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src=""></li>
+                <li class="wechat-code"><img src=""></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+        
+          
+            <div class="post-nepre full next">
+          
+            <a href="/2018/12/13/css知识点小结-2/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/21/1klJOI.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://s2.ax1x.com/2020/01/21/1klJOI.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                css知识点小结(2)</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
       
-  <!-- 首页默认取最最新文章集 -->
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
 
-  <div class="post-thumb">
-    <a href="/2018/12/21/前端兼容性问题小结/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/23/1ELyMn.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-12-21 20:12</div>
-      <a href="/2018/12/21/前端兼容性问题小结/" class="post-title">
-        <h3>前端兼容性问题小结</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/前端/">前端<em>·</em></a>
-          
-            <a href="/tags/兼容性/">兼容性<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>前端兼容性问题小结</p>
-        <div class="post-bottom">
-          <a href="/2018/12/21/前端兼容性问题小结/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png" itemprop="image" alt="默兽" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author">默兽</a>
+            </h3>
+          </div>
         </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/12/13/css知识点小结-2/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/21/1klJOI.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-12-13 20:12</div>
-      <a href="/2018/12/13/css知识点小结-2/" class="post-title">
-        <h3>css知识点小结(2)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/css/">css<em>·</em></a>
-          
-            <a href="/tags/总结/">总结<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>css知识点小结</p>
-        <div class="post-bottom">
-          <a href="/2018/12/13/css知识点小结-2/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/12/02/css知识点小结-1/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/21/1klJOI.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-12-2 19:12</div>
-      <a href="/2018/12/02/css知识点小结-1/" class="post-title">
-        <h3>css知识点小结(1)</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/css/">css<em>·</em></a>
-          
-            <a href="/tags/总结/">总结<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>css知识点小结</p>
-        <div class="post-bottom">
-          <a href="/2018/12/02/css知识点小结-1/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/11/25/html知识点总结/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/16/lxQFot.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-11-25 20:11</div>
-      <a href="/2018/11/25/html知识点总结/" class="post-title">
-        <h3>html知识点小结</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/总结/">总结<em>·</em></a>
-          
-            <a href="/tags/html/">html<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/技术/">技术</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>html知识点小结</p>
-        <div class="post-bottom">
-          <a href="/2018/11/25/html知识点总结/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-    
-<article  class="post post-list-thumb post-list-thumb-left"  class="post post-list-thumb" itemscope="" itemtype="http://schema.org/BlogPosting">
-
-  <div class="post-thumb">
-    <a href="/2018/11/12/First-Blog/">
-      <img class="lazyload" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/16/lxeMeP.jpg">
-    </a>
-  </div>
-  <div class="post-content-wrap">
-    <div class="post-content">
-      <div class="post-date">
-        <i class="iconfont icon-time">
-        </i>2018-11-12 19:11</div>
-      <a href="/2018/11/12/First-Blog/" class="post-title">
-        <h3>First-Blog</h3>
-      </a>
-      <div class="post-meta">
-        <span><i class="fa fa-tags"></i>
-        
-            <a href="/tags/第一篇博客/">第一篇博客<em>·</em></a>
-          
-        </span>
-        <span>
-          <i class="iconfont icon-file"></i>
-          
-            <a href="/categories/随想/">随想</a>
-          
-        </span>
-      </div>
-      <div class="float-content">
-        <p>默兽的第一篇博客</p>
-        <div class="post-bottom">
-          <a href="/2018/11/12/First-Blog/" class="button-normal">
-            <i class="iconfont icon-caidan"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
-  
-
-
-    </main>
-      <!-- 首页默认取最最新文章集 -->
-    <!--  -->
-  </div>
-  
+        <hr>
+        <p><i class="iconfont icon-write"></i>默兽啊moshou</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
 </div>
+
+
 
     </div>    
     <div class="ins-search">
