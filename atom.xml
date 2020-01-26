@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-26T07:06:41.552Z</updated>
+  <updated>2020-01-26T08:39:32.794Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2019/01/23/Tomcat%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2019/01/23/Tomcat安装和使用/</id>
     <published>2019-01-23T12:16:30.000Z</published>
-    <updated>2020-01-26T07:06:41.552Z</updated>
+    <updated>2020-01-26T08:39:32.794Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="Tomcat安装和使用"><a href="#Tomcat安装和使用" class="headerlink" title="Tomcat安装和使用"></a>Tomcat安装和使用</h2><p>安装JDK步骤及配置JDK环境变量步骤省略。</p><h3 id="一下载安装。"><a href="#一下载安装。" class="headerlink" title="一下载安装。"></a>一下载安装。</h3><h4 id="1-官网下载"><a href="#1-官网下载" class="headerlink" title="1.官网下载"></a>1.官网下载</h4><p><img src="https://s2.ax1x.com/2020/01/24/1ZcTtx.png" alt></p><p>#####2.解压后文件内容</p><p><img src="https://s2.ax1x.com/2020/01/24/1ZgXGV.png" alt></p><p>#####3.配置环境变量</p><img src="/.com//01/23/Tomcat安装和使用/123.png" title="This is an test image">]]></content>
+    <content type="html"><![CDATA[<h2 id="Tomcat安装和使用"><a href="#Tomcat安装和使用" class="headerlink" title="Tomcat安装和使用"></a>Tomcat安装和使用</h2><p>安装JDK步骤及配置JDK环境变量步骤省略。</p><h3 id="一下载安装。"><a href="#一下载安装。" class="headerlink" title="一下载安装。"></a>一下载安装。</h3><h4 id="1-官网下载"><a href="#1-官网下载" class="headerlink" title="1.官网下载"></a>1.官网下载</h4><p><img src="https://s2.ax1x.com/2020/01/24/1ZcTtx.png" alt></p><h4 id="2-文件减压"><a href="#2-文件减压" class="headerlink" title="2.文件减压"></a>2.文件减压</h4><p><img src="https://s2.ax1x.com/2020/01/24/1ZgXGV.png" alt></p><h3 id="二使用Tomcat"><a href="#二使用Tomcat" class="headerlink" title="二使用Tomcat"></a>二使用Tomcat</h3><ol><li><p>先解压下载的压缩包、然后在bin目录下找到startup.bat文件、并用鼠标双击此文件</p></li><li><p>然后在浏览器中输入<code>http://localhost:8080</code>回车后，显示如下界面：此时就说明Tomcat服务启动正常了。</p><p><img src="https://s2.ax1x.com/2020/01/26/1mslTI.jpg" alt></p><p>​</p></li><li><p>将打包后的文件放入<code>webapps</code>目录下在此启动Tomcat访问8080端口即可。</p></li></ol>]]></content>
     
     <summary type="html">
     
