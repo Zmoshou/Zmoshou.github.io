@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-01-24T12:17:56.825Z</updated>
+  <updated>2020-01-26T07:06:41.552Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,18 +17,24 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Tomcat安装和使用</title>
-    <link href="http://yoursite.com/2019/01/24/Tomcat%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
-    <id>http://yoursite.com/2019/01/24/Tomcat安装和使用/</id>
-    <published>2019-01-24T12:23:30.000Z</published>
-    <updated>2020-01-24T12:17:56.825Z</updated>
+    <title></title>
+    <link href="http://yoursite.com/2019/01/23/Tomcat%E5%AE%89%E8%A3%85%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2019/01/23/Tomcat安装和使用/</id>
+    <published>2019-01-23T12:16:30.000Z</published>
+    <updated>2020-01-26T07:06:41.552Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Tomcat安装和使用"><a href="#Tomcat安装和使用" class="headerlink" title="Tomcat安装和使用"></a>Tomcat安装和使用</h2><p>安装JDK步骤及配置JDK环境变量步骤省略。</p><h3 id="一下载安装。"><a href="#一下载安装。" class="headerlink" title="一下载安装。"></a>一下载安装。</h3><h4 id="1-官网下载"><a href="#1-官网下载" class="headerlink" title="1.官网下载"></a>1.官网下载</h4><p><img src="https://s2.ax1x.com/2020/01/24/1ZcTtx.png" alt></p><p>#####2.解压后文件内容</p><p><img src="https://s2.ax1x.com/2020/01/24/1ZgXGV.png" alt></p><p>#####3.配置环境变量</p><img src="/.com//01/23/Tomcat安装和使用/123.png" title="This is an test image">]]></content>
     
     <summary type="html">
+    
+      Tomcat
     
     </summary>
     
       <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
     
+    
+      <category term="Tomcat" scheme="http://yoursite.com/tags/Tomcat/"/>
     
   </entry>
   
