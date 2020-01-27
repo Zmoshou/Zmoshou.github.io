@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">AJAX | Moshou</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "さくら荘そのMoshou";
+  mashiro_option.author_name = "Moshou";
+  mashiro_option.site_url = "";
+  mashiro_option.v_appId = "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz";
+  mashiro_option.v_appKey = "mgOpfzbkHYqU92CV4IDlAUHQ";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://s2.ax1x.com/2020/01/13/lHmawj.jpg,https://s2.ax1x.com/2020/01/13/lHm1Yt.jpg,https://s2.ax1x.com/2020/01/13/lHuHdH.jpg,https://s2.ax1x.com/2020/01/13/lHuXWt.jpg,https://s2.ax1x.com/2020/01/13/lHuxQf.jpg,https://s2.ax1x.com/2020/01/13/lHKSOS.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="">
+          <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>三流的代码，一流的bug!</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/github.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://weibo.com/u/5708109003" target="_blank" class="social-github" title="sina">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/sina.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://music.163.com/#/user/home?id=251175368" target="_blank" class="social-github" title="wangyiyun">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wangyiyun.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://s2.ax1x.com/2020/01/16/lxZuUU.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">さくら荘その</span>
+            <span class="shironeko">Moshou</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/生活/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/资源/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/tags/悦读/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                          番组
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/图集/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          图集
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/lab/">
+                          <i class="fa fa-cogs" aria-hidden="true"></i>
+                          Lab
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://s2.ax1x.com/2020/01/27/1u0Vqs.png);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/27/1u0Vqs.png">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      AJAX</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+          </a>
+        </span>
+        <span>
+          <a href=""></a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-2-22<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h1 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h1><h2 id="1-什么是AJAX？"><a href="#1-什么是AJAX？" class="headerlink" title="1.什么是AJAX？"></a>1.什么是AJAX？</h2><p> Ajax（Asynchronous JavaScript and XML的缩写）是一种异步请求数据的web开发技术，对于改善用户的体验和页面性能很有帮助。简单地说，在不需要重新刷新页面的情况下，Ajax 通过异步请求加载后台数据，并在网页上呈现出来。常见运用场景有表单验证是否登入成功、百度搜索下拉框提示和快递单号查询等等。</p>
+<p><strong>AJAX的好处</strong>：可以通过<code>js</code>代码发送get或者post的请求去从后台获取到相应数据，并只对页面中的部分标签进行刷新渲染，而不需要刷新整个页面，节约了带宽，优化了性能</p>
+<h2 id="2-创建AJAX对象"><a href="#2-创建AJAX对象" class="headerlink" title="2.创建AJAX对象"></a>2.创建AJAX对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//兼容性写法  ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);是为了兼容IE5 IE6</span><br><span class="line">var ajax = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(&apos;Microsoft.XMLHTTP&apos;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-AJAX的方法"><a href="#3-AJAX的方法" class="headerlink" title="3.AJAX的方法"></a>3.AJAX的方法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//设置请求方式</span><br><span class="line">ajax.open(&quot;post&quot;,&quot;url&quot;,true);  //第三个参数如果为true，则是异步，反之同步</span><br><span class="line"></span><br><span class="line">//设置请求头格式（post请求时一定要加请求头，这是因为在传输过程中会出现转码的情况，可能导致乱码的情况）</span><br><span class="line">xhr.setRequestHeader(&apos;Content-Type&apos;, &apos;application/x-www-form-urlencoded&apos;);</span><br><span class="line"></span><br><span class="line">//发送请求:get请求参数放在url后面，post请求参数send()方法里面</span><br><span class="line">ajax.send(&quot;数据&quot;); </span><br><span class="line"></span><br><span class="line">//监听ajax状态，当ajax的状态发生改变的时候执行</span><br><span class="line">ajax.onreadystatechange = function()&#123;</span><br><span class="line">    //响应完成，浏览器已经可以获取到服务器响应结果了</span><br><span class="line">    if(this.readyState == 4)&#123;  //这是AJAX的状态码 区别与http的状态码 状态码还有 1 2 3 其中3是数据正在传输时的状态，他不保证数据的完整性</span><br><span class="line">        //http响应的状态码</span><br><span class="line">        if(this.state == 200)&#123;  //还有302  301  404...</span><br><span class="line">            //获取响应内容</span><br><span class="line">            console.log(this.responseText); //用ajax.responseText获取服务器返回的数据</span><br><span class="line">            	//responseText 获得字符串形式的响应数据。</span><br><span class="line">			   //responseXML 获得XML 形式的响应数据</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-数据渲染的两种方式"><a href="#4-数据渲染的两种方式" class="headerlink" title="4.数据渲染的两种方式"></a>4.数据渲染的两种方式</h2><h3 id="4-1数据在服务器中渲染完毕，返回给客户端一个完整页面"><a href="#4-1数据在服务器中渲染完毕，返回给客户端一个完整页面" class="headerlink" title="4.1数据在服务器中渲染完毕，返回给客户端一个完整页面"></a>4.1数据在服务器中渲染完毕，返回给客户端一个完整页面</h3><ol>
+<li>浏览器发送请求至服务器</li>
+<li>服务器接收到请求的信息，根据请求找到相应的信息（如JSON数据），在读取相应的页面文件，并渲染成一个完整的页面，将这个页面返回给客户端</li>
+<li>客户端接收到此页面，并显示 (此方式要在服务器端安装art-template express-art-template等第三方模板）</li>
+</ol>
+<h3 id="4-2服务器只返回相应的数据，客户端接收到数据后，在客户端进行渲染，并显示"><a href="#4-2服务器只返回相应的数据，客户端接收到数据后，在客户端进行渲染，并显示" class="headerlink" title="4.2服务器只返回相应的数据，客户端接收到数据后，在客户端进行渲染，并显示"></a>4.2服务器只返回相应的数据，客户端接收到数据后，在客户端进行渲染，并显示</h3><ol>
+<li>客户端发送数据请求给服务器</li>
+<li>服务器拿到请求，找到相应的数据（如JSON），直接将此数据返回给客户端</li>
+<li>客户端拿到数据后，在客户端进行渲染，并显示。（此方式要用到前端渲染插件template-web.js）</li>
+</ol>
+<h2 id="5-XML"><a href="#5-XML" class="headerlink" title="5.XML"></a>5.XML</h2><p>XML extensible Markup Language 扩展的标记语言，XML的标签可以自定义<br>HTML Hyper Text Markup Lanaguage HTML的标签是由W3C规范的，大概一共200多个</p>
+<p><strong>XML用途：</strong><br>1、 定义数据结构<br>2、 作为配置文件出现</p>
+<p><strong>XML组成：</strong><br>1、 XML文档声明<br>2、 XML标签<br>3、 XML属性<br>4、 XML注释</p>
+<p><strong>XML文档注意点：</strong><br>1）xml的标签必须成对出现如，为成对出现时的标签也必须要是自关闭标签 如<br>2）xml标签名称区分大小写。<br>3）xml标签一定要正确配对。<br>4）xml标签名中间不能使用空格<br>5）xml标签名不能以数字开头<br>6）注意： 在一个xml文档中，有且仅有一个根标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//使用xml设计一个通讯录</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;contact&gt;</span><br><span class="line">	&lt;person id=&quot;100&quot;&gt;</span><br><span class="line">		 &lt;name&gt;张三&lt;/name&gt;</span><br><span class="line">		 &lt;age&gt;18&lt;/age&gt;</span><br><span class="line">		 &lt;phone&gt;12345678&lt;/phone&gt;</span><br><span class="line">		 &lt;email&gt;12453@qq.com&lt;/email&gt;</span><br><span class="line">	&lt;/person&gt;</span><br><span class="line">	&lt;person id=&quot;101&quot;&gt;</span><br><span class="line">		 &lt;name&gt;李四&lt;/name&gt;</span><br><span class="line">		 &lt;age&gt;20&lt;/age&gt;</span><br><span class="line">		 &lt;phone&gt;22345678&lt;/phone&gt;</span><br><span class="line">		 &lt;email&gt;34453@qq.com&lt;/email&gt;</span><br><span class="line">	&lt;/person&gt;</span><br><span class="line">&lt;/contact&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>xml的使用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">//服务器代码</span><br><span class="line">//返回XML格式的数据</span><br><span class="line">app.get(&quot;/getXML&quot;,(req,res)=&gt;&#123;</span><br><span class="line">	//设置响应头，指定返回的数据是XML</span><br><span class="line">	res.header(&quot;content-type&quot;,&quot;application/xml&quot;);</span><br><span class="line"></span><br><span class="line">	var xml =  &apos;&lt;?xml version=&quot;1.1&quot; encoding=&quot;utf-8&quot;?&gt;&apos;;//XML文档声明</span><br><span class="line">	xml += &apos;&lt;person&gt;&apos;;</span><br><span class="line">	xml += &apos;&lt;name&gt;羊杨&lt;/name&gt;&apos;;</span><br><span class="line">	xml += &apos;&lt;age&gt;16&lt;/age&gt;&apos;;</span><br><span class="line">	xml += &apos;&lt;gender&gt;男&lt;/gender&gt;&apos;;</span><br><span class="line">	xml += &apos;&lt;/person&gt;&apos;;</span><br><span class="line">	</span><br><span class="line">	res.send(xml);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//客户端代码</span><br><span class="line">ajax.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;</span><br><span class="line">		//获取响应的XML数据</span><br><span class="line">		var xml = this.responseXML.documentElement;//ajax.responseXML.documentElement拿到文档数据</span><br><span class="line">		var age = xml.querySelector(&quot;age&quot;);//用标签选择器获取到age数据  但此时age是&lt;age&gt;16&lt;/age&gt;</span><br><span class="line">		console.log(age.innerHTML);//此处用innerText拿不到数据</span><br><span class="line">		console.log(xml.children);//xml的语法几乎与html语法类似</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JSON</p>
+<p>json数据的使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//服务器代码</span><br><span class="line">//返回JSON格式的数据</span><br><span class="line">app.get(&quot;/getJSON&quot;,(req,res)=&gt;&#123;</span><br><span class="line">	//数组</span><br><span class="line">	let arr = [</span><br><span class="line">		&#123;</span><br><span class="line">			name:&quot;zhangsan&quot;,</span><br><span class="line">			age:&quot;18&quot;,</span><br><span class="line">			gender:&quot;男&quot;,</span><br><span class="line">			id:001</span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">			name:&quot;lisi&quot;,</span><br><span class="line">			age:&quot;28&quot;,</span><br><span class="line">			gender:&quot;男&quot;,</span><br><span class="line">			id:002</span><br><span class="line">		&#125;</span><br><span class="line">	]</span><br><span class="line">	//将数组转换为JSON数据</span><br><span class="line">	res.status(200).send(JSON.stringify(arr));</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//客户端代码</span><br><span class="line">ajax.onreadystatechange = function()&#123;</span><br><span class="line">	if(this.readyState == 4)&#123;</span><br><span class="line">		console.log(this.responseText); //这是JSON字符串，在使用的时候往往需要转换为对象</span><br><span class="line">		var students = JSON.parse(this.responseText);</span><br><span class="line">		var html = template(&quot;generatorTable&quot;,&#123;students:students&#125;);</span><br><span class="line">		container.innerHTML = html;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-jQuery中的AJAX"><a href="#6-jQuery中的AJAX" class="headerlink" title="6.jQuery中的AJAX"></a>6.jQuery中的AJAX</h2><p>推荐使用 方便的一批</p>
+<h3 id="6-1使用"><a href="#6-1使用" class="headerlink" title="6.1使用"></a>6.1使用</h3><p>客户端代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    //请求方式</span><br><span class="line">    type:&quot;get&quot;, //post</span><br><span class="line">    </span><br><span class="line">    //请求路径</span><br><span class="line">    url:&quot;&quot;, //如http://localhost:3000/index</span><br><span class="line">    </span><br><span class="line">    //请求参数，无论是get还是post请求，请求参数都可以写在这里</span><br><span class="line">    //注意：请求为get时  在服务器得到请求参数时 仍然使用res.query</span><br><span class="line">    //这里的data数据必须为字符串 若要传入json数据 需要将json数据转换为字符串如 JSON.stringify(&#123;[&#123;&#125;,&#123;&#125;]&#125;)</span><br><span class="line">    data:&#123;name:&quot;zhangsan&quot;&#125;,</span><br><span class="line">    </span><br><span class="line">    //规定所要请求的数据的类型</span><br><span class="line">    dataType: &apos;&apos;,</span><br><span class="line">    </span><br><span class="line">    //在jQuery中如果请求已经是post，默认的contentType就是application/x-www-form-urlencoded,不需要单独再去写</span><br><span class="line">    //contentType: &quot;application/x-www-form-urlencoded&quot;,</span><br><span class="line">    //请求成功的回调</span><br><span class="line">    success:function(res)&#123;</span><br><span class="line">        console.log(res);//res是请求的到的数据</span><br><span class="line">    &#125;</span><br><span class="line">    //请求出错的回调 推荐写</span><br><span class="line">    error:function(err)&#123;</span><br><span class="line">    	console.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">	//无论请求的成功与否，只要请求结束都会执行此函数</span><br><span class="line">	complete:function(xhr)&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>服务器代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">let express = require(&quot;express&quot;);</span><br><span class="line">let app = express();</span><br><span class="line">const bodyParser = require(&apos;body-parser&apos;);</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;extended:false&#125;));</span><br><span class="line">//注意 当客户端中的data:JSON.stringify([&#123;name:&apos;zhangsan&apos;&#125;,&#123;name:&apos;lisi&apos;&#125;])时，服务器需要此配置</span><br><span class="line">//以解析body中的json数据</span><br><span class="line">app.use(bodyParser.json(&#123;extended:false&#125;));</span><br><span class="line"></span><br><span class="line">app.use(express.static(&quot;./views&quot;));</span><br><span class="line"></span><br><span class="line">//当ajax的url为&apos;/getJSON&apos;时 此接口响应 返回JSON格式的数据</span><br><span class="line">//此时ajax的dataType要设置为&apos;json&apos;</span><br><span class="line">app.get(&quot;/getJSON&quot;,(req,res)=&gt;&#123;</span><br><span class="line">    //数组</span><br><span class="line">    let arr = [</span><br><span class="line">        &#123;</span><br><span class="line">            name:&quot;zhangsan&quot;,</span><br><span class="line">            age:&quot;18&quot;,</span><br><span class="line">            gender:&quot;男&quot;,</span><br><span class="line">            id:001</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            name:&quot;lisi&quot;,</span><br><span class="line">            age:&quot;28&quot;,</span><br><span class="line">            gender:&quot;男&quot;,</span><br><span class="line">            id:002</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    arr.forEach((user,idx)=&#123;</span><br><span class="line">        if(user.name == req.body.name)&#123;</span><br><span class="line">            res.status(200).send(JSON.stringify(user));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//当ajax的url为&apos;/getXML&apos;时 此接口响应 返回XML格式的数据</span><br><span class="line">//此时ajax的dataType要设置为&apos;xml&apos;</span><br><span class="line">app.get(&quot;/getXML&quot;,(req,res)=&gt;&#123;</span><br><span class="line">    //设置响应头，指定返回的数据是XML</span><br><span class="line">    res.header(&quot;content-type&quot;,&quot;application/xml&quot;);</span><br><span class="line"></span><br><span class="line">    var xml =  &apos;&lt;?xml version=&quot;1.1&quot; encoding=&quot;utf-8&quot;?&gt;&apos;;</span><br><span class="line">    xml += &apos;&lt;person&gt;&apos;;</span><br><span class="line">    xml += &apos;&lt;name&gt;zhangsan&lt;/name&gt;&apos;;</span><br><span class="line">    xml += &apos;&lt;age&gt;16&lt;/age&gt;&apos;;</span><br><span class="line">    xml += &apos;&lt;gender&gt;男&lt;/gender&gt;&apos;;</span><br><span class="line">    xml += &apos;&lt;/person&gt;&apos;;</span><br><span class="line"></span><br><span class="line">    res.send(xml);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>发送也接受html或script数据</p>
+<p>服务器代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">const app = express();</span><br><span class="line">const bodyParser = require(&apos;body-parser&apos;);</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;extended:false&#125;));</span><br><span class="line"></span><br><span class="line">app.use(express.static(&apos;views&apos;));</span><br><span class="line"></span><br><span class="line">app.get(&apos;/getScript&apos;,(req,res)=&gt;&#123;</span><br><span class="line">    res.header(&apos;content-type&apos;,&apos;application/javascript;charset=utf-8&apos;);</span><br><span class="line">    res.send(&apos;alert(123);&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.get(&apos;/getHtml&apos;,(req,res)=&gt;&#123;</span><br><span class="line"></span><br><span class="line">    res.header(&apos;content-type&apos;,&apos;text/html;charset=utf-8&apos;)</span><br><span class="line">    res.send(&apos;&lt;h1&gt;HTML&lt;/h1&gt;&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(3000,()=&gt;&#123;</span><br><span class="line">    console.log(&apos;running...&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#btn1&apos;).click(function()&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: &apos;get&apos;,</span><br><span class="line">        url: &apos;/getHtml&apos;,</span><br><span class="line">        data: &apos;&apos;,</span><br><span class="line">        dataType: &apos;html&apos;,</span><br><span class="line">        success:function(res)&#123;</span><br><span class="line">            //因为dataType为html  jQuery。AJAX会自动设置响应头为text/html  则 可以直接追加res到页面中</span><br><span class="line">            $(&apos;#info&apos;).append(res);</span><br><span class="line">        &#125;,</span><br><span class="line">        error:function(err)&#123;</span><br><span class="line">            console.log(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(&apos;#btn2&apos;).click(function()&#123;</span><br><span class="line">    $.ajax(&#123;</span><br><span class="line">        type: &apos;get&apos;,</span><br><span class="line">        url: &apos;/getScript&apos;,</span><br><span class="line">        data: &apos;&apos;,</span><br><span class="line">        dataType: &apos;script&apos;,</span><br><span class="line">        success:function(res)&#123;</span><br><span class="line">            //之所以alert()能执行  是因为将script代码打印到控制台  控制台会执行script代码</span><br><span class="line">            //也可以用script标签的对res进行封装 追加到页面中 也可以执行</span><br><span class="line">            console.log(res);</span><br><span class="line">        &#125;,</span><br><span class="line">        error:function(err)&#123;</span><br><span class="line">            console.log(err);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2dataType"><a href="#6-2dataType" class="headerlink" title="6.2dataType"></a>6.2dataType</h3><p><strong>dataType取值有xml、html、json、jsonp、script或者text</strong></p>
+<p>当dataType取值为<strong>json</strong>，会自动将服务器返回的文本数据通过JSON.parse()转换成对象。<br>服务器应该设置这个响应头：<strong>res.header(“content-type”, “application/json;charset=utf-8”);</strong></p>
+<p>当dataType为<strong>xml或者text</strong>的时候，返回的数据不会另做处理<br>服务器应该设置这个响应头：<strong>res.header(“content-type”,”application/xml”);</strong><br><strong>res.header(“content-type”,”text/plain;charset=utf-8”);</strong></p>
+<p>当dataType为<strong>html</strong>的时候，返回的内容中的script标签会在网页内容被拼接到页面的时候执行<br>服务器应该设置这个响应头：<strong>res.header(“content-type”,”text/html;charset=utf-8”);</strong></p>
+<p>当dataType为<strong>script</strong>的时候，会将服务器返回的结果当成js代码执行并且将js代码的文本内容返回给客户端<br>服务器应该设置这个响应头：<strong>res.header(“content-type”,”application/javascript”);</strong></p>
+<p>当dataType为<strong>jsonp</strong>的时候，会向服务器发送一个jsonp请求<br>服务器应该设置这个响应头：<strong>res.header(“content-type”,”application/javascript”);</strong></p>
+<h2 id="6-3nprogress的使用（全局事件处理）"><a href="#6-3nprogress的使用（全局事件处理）" class="headerlink" title="6.3nprogress的使用（全局事件处理）"></a>6.3nprogress的使用（全局事件处理）</h2><p>1、在html文件中引入nprogress.js 和 nprogress.css</p>
+<p>2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(document).ajaxStart(function()&#123;//请求数据开始</span><br><span class="line">    NProgress.start();//数据加载动画</span><br><span class="line">&#125;).ajaxStop(function()&#123;//请求数据结束</span><br><span class="line">    NProgress.done();//数据加载完毕动画</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-跨域请求"><a href="#7-跨域请求" class="headerlink" title="7.跨域请求"></a>7.跨域请求</h2><p><strong>同源策略</strong>是浏览器的一种安全策略，所谓同源是指 <strong>域名，协议，端口完全相同</strong> ，只有同源的地址才可以相互通过AJAX的方式请求。</p>
+<p>同源或者不同源说的是两个地址之间的关系，不同源地址之间请求我们称之为<strong>跨域请求</strong></p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8000  是不可以通过ajax访问  http://locally.uieee.com/categories的</span><br><span class="line">因为两者不满足同源的条件</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-1如何进行跨域请求"><a href="#7-1如何进行跨域请求" class="headerlink" title="7.1如何进行跨域请求"></a>7.1如何进行跨域请求</h3><ol>
+<li>CORS</li>
+<li>JSONP</li>
+<li>代理服务器</li>
+<li>修改document.domain</li>
+<li>Iframe</li>
+<li>Location.hash</li>
+<li>Window.postMessage()</li>
+<li>Websocket</li>
+</ol>
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>只需要改动服务器，不用改动客户端代码，客户端可以直接使用$.ajax()</p>
+<p>Cross Origin Resource Share，跨域资源共享。这种方案无需客户端作出任何变化（客户端不用改代码），只是在被请求的服务端响应的时候添加一个Access- Control-Allow-Origin 的响应头，表示这个资源是否允许指定域请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//直接在服务器配置如下,客户端代码和以前一样写</span><br><span class="line">app.all(&apos;*&apos;, function(req, res, next) &#123;</span><br><span class="line">    res.header(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</span><br><span class="line">    res.header(&apos;Access-Control-Allow-Headers&apos;, &apos;Content-type&apos;);</span><br><span class="line">    res.header(&quot;Access-Control-Allow-Methods&quot;, &quot;PUT,POST,GET,DELETE,OPTIONS,PATCH&quot;);</span><br><span class="line">    res.header(&apos;Access-Control-Max-Age&apos;,6000);//预请求缓存10分钟</span><br><span class="line">    next();  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p>JSON with Padding 实质上是通过script的src属性进行数据请求。本质上不是AJAX请求</p>
+<p>需要服务器和客户端配合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//此时客户端的地址为http://localhost:3000</span><br><span class="line">实现要点</span><br><span class="line">//客户端代码</span><br><span class="line">var script = document.createElement(&apos;script&apos;);</span><br><span class="line">script.src = &apos;http://localhost:9999/testJSONP&apos;;//向http://localhost:9999发送跨域请求</span><br><span class="line">document.body.appendChild(script)</span><br><span class="line"></span><br><span class="line">//服务器代码</span><br><span class="line">app.get(&quot;/testJSONP&quot;,(req,res)=&gt;&#123;</span><br><span class="line">	//设置响应头 服务器给客户端发送了一个js代码块</span><br><span class="line">	res.header(&quot;content-type&quot;,&quot;application/javascript&quot;);</span><br><span class="line">	let data = JSON.stringify(&#123;&quot;name&quot;:&quot;zhangsan&quot;&#125;) ;</span><br><span class="line">	//服务器发送 `foo(&apos;&#123;&quot;name&quot;:&quot;zhangsan&quot;&#125;&apos;)` 这个字符串给客户端</span><br><span class="line">	res.send(`foo($&#123;data&#125;)`);</span><br><span class="line">&#125;)</span><br><span class="line">//如果服务器给客户端返回的js代码块中有函数调用，必须提前在客户端中声明要调用的那个函数</span><br><span class="line">function foo(data)&#123;</span><br><span class="line">	console.log(data);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>jQuery代码</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">//客户端代码</span><br><span class="line">$.ajax(&#123;</span><br><span class="line">    type:&quot;get&quot;,</span><br><span class="line">    url:&quot;http://localhost:9999/testJSONP&quot;,</span><br><span class="line">    data:&apos;&apos;,</span><br><span class="line">    dataType: &apos;jsonp&apos;,</span><br><span class="line">    success:function(res)&#123;</span><br><span class="line">        $(&apos;body&apos;).append(res);</span><br><span class="line">    &#125;</span><br><span class="line">    error:function(err)&#123;</span><br><span class="line">    	console.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">	complete:function(xhr)&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">function foo(data)&#123;</span><br><span class="line">	console.log(data);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//服务器http://localhost:3000代码</span><br><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">const app = express();</span><br><span class="line">const bodyParser = require(&apos;body-parser&apos;);</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;extended:false&#125;));</span><br><span class="line"></span><br><span class="line">app.use(express.static(&apos;views&apos;));</span><br><span class="line"></span><br><span class="line">app.listen(3000,()=&gt;&#123;</span><br><span class="line">    console.log(&apos;running...&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">//服务器http://localhost:8888代码</span><br><span class="line">const express = require(&apos;express&apos;);</span><br><span class="line">const app = express();</span><br><span class="line">const bodyParser = require(&apos;body-parser&apos;);</span><br><span class="line">app.use(bodyParser.urlencoded(&#123;extended:false&#125;));</span><br><span class="line"></span><br><span class="line">app.get(&apos;/getJsonp&apos;,(req,res)=&gt;&#123;</span><br><span class="line">    res.send(&apos;foo(&quot;你拿到了http://localhost:8888的jsonp&quot;);&apos;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">app.listen(8888,()=&gt;&#123;</span><br><span class="line">    console.log(&apos;running...&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-结束语"><a href="#8-结束语" class="headerlink" title="8.结束语"></a>8.结束语</h2><p>AJAX是通过<code>XMLHttpRequest</code>或者封装后的框架进行网络请求，由于这种方式的配置和调用方式非常混乱，已被Fetch取代</p>
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src=""></li>
+                <li class="wechat-code"><img src=""></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/03/04/webpack/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/27/1ucVpt.png" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://s2.ax1x.com/2020/01/27/1ucVpt.png">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                webpack</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/02/05/js基本知识/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/01/26/1m64W6.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://s2.ax1x.com/2020/01/26/1m64W6.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                JS基础知识</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>默兽啊moshou</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Moshou<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2018</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">さくら荘そのMoshou</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/Zmoshou" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://weibo.com/u/5708109003" class="fa fa-weibo" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=752625566&site=qq&menu=yes" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/生活/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/资源/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/tags/悦读/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                  番组
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/图集/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  图集
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+              <li>
+                <a href="/lab/">
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                  Lab
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="2660651585"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
