@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-02-04T08:37:38.312Z</updated>
+  <updated>2020-02-04T13:51:02.226Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>移动端键盘弹出顶起fixed定位问题</title>
+    <link href="http://yoursite.com/2019/07/10/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%94%AE%E7%9B%98%E5%BC%B9%E5%87%BA%E9%A1%B6%E8%B5%B7fixed%E5%AE%9A%E4%BD%8D%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/07/10/移动端键盘弹出顶起fixed定位问题/</id>
+    <published>2019-07-10T11:19:19.000Z</published>
+    <updated>2020-02-04T13:51:02.226Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="移动端键盘弹出顶起fixed定位问题"><a href="#移动端键盘弹出顶起fixed定位问题" class="headerlink" title="移动端键盘弹出顶起fixed定位问题"></a>移动端键盘弹出顶起fixed定位问题</h2><blockquote><p>移动端页面的底部菜单栏，通常会使用fixed定位在底部。在安卓手机上经常会出现软键盘弹出时，底部定位被顶上去，下面提供vue和jQuery两种解决办法。</p></blockquote><h3 id="1vue-js代码"><a href="#1vue-js代码" class="headerlink" title="1vue.js代码"></a>1vue.js代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--html部分--&gt;</span><br><span class="line">&lt;div class=&quot;footer&quot; v-show=&quot;hideshow&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// js 部分</span><br><span class="line">data()&#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    docmHeight: document.documentElement.clientHeight,  //默认屏幕高度</span><br><span class="line">showHeight: document.documentElement.clientHeight,   //实时屏幕高度</span><br><span class="line">hideshow:true,  //显示或者隐藏footer</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">mounted() &#123;</span><br><span class="line">  // window.onresize监听页面高度的变化</span><br><span class="line">  window.onresize = ()=&gt;&#123;</span><br><span class="line">    return(()=&gt;&#123;</span><br><span class="line">      this.showHeight = document.body.clientHeight;</span><br><span class="line">    &#125;)()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">//监听</span><br><span class="line">watch:&#123;</span><br><span class="line">  showHeight:function() &#123;</span><br><span class="line">    if(this.docmHeight &gt; this.showHeight)&#123;</span><br><span class="line">      this.hideshow=false</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">      this.hideshow=true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure><h3 id="2-jQuery代码"><a href="#2-jQuery代码" class="headerlink" title="2 jQuery代码"></a>2 jQuery代码</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> winHeight = $(<span class="built_in">window</span>).height();  <span class="comment">//获取当前页面高度</span></span><br><span class="line">$(<span class="built_in">window</span>).resize(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> thisHeight = $(<span class="keyword">this</span>).height();</span><br><span class="line">    <span class="keyword">if</span> ( winHeight - thisHeight &gt; <span class="number">140</span> ) &#123;</span><br><span class="line">        <span class="comment">//键盘弹出</span></span><br><span class="line">        $(<span class="string">'.footer'</span>).css(<span class="string">'position'</span>,<span class="string">'static'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//键盘收起</span></span><br><span class="line">        $(<span class="string">'.footer'</span>).css(&#123;<span class="string">'position'</span>:<span class="string">'fixed'</span>,<span class="string">'bottom'</span>:<span class="string">'0'</span>&#125;);</span><br><span class="line">   </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>原文链接：<a href="https://blog.csdn.net/Tessa_zzl/article/details/89680315" target="_blank" rel="noopener">https://blog.csdn.net/Tessa_zzl/article/details/89680315</a></p>]]></content>
+    
+    <summary type="html">
+    
+      移动端键盘弹出顶起fixed定位问题
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="移动端" scheme="http://yoursite.com/tags/%E7%A7%BB%E5%8A%A8%E7%AB%AF/"/>
+    
+      <category term="fixed定位" scheme="http://yoursite.com/tags/fixed%E5%AE%9A%E4%BD%8D/"/>
+    
+  </entry>
   
   <entry>
     <title>git study</title>
