@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  
+  <title itemprop="name">bilibi部分Api接口整理 | Moshou</title>
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+SerifMerriweather|Merriweather+Sans|Source+Code+Pro|Ubuntu:400,700|Noto+Serif+SC" media="all">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="stylesheet" id="saukra_css-css" href="/css/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/lib.min.css" media="all">
+  <link rel="stylesheet" href="/css/font.css" media="all">
+  <link rel="stylesheet" href="/css/insight.css" media="all">
+  <link rel="stylesheet" href="/css/jquery.fancybox.min.css" media="all">
+  <link rel="stylesheet" href="/css/zoom.css" media="all">
+  <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<!--   <link rel="stylesheet" id="saukra_css-css" href="https://2heng.xin/wp-content/cache/autoptimize/css/autoptimize_ad42a61f4c7d4bdd9f91afcff6b5dda5.css
+" type="text/css" media="all"> -->
+  <script>
+  /*Initial Variables*/
+  var mashiro_option = new Object();
+  var mashiro_global = new Object();
+  mashiro_option.NProgressON = true;
+  /* 
+   * 邮箱信息之类的东西可以填在这里，这些js变量基本都作用于sakura-app.js
+   * 这样的设置仅是为了方便在基于PHP开发的主题中设置js变量，既然移植到了Node上，我想或许可以精简这一逻辑吧
+   */
+  mashiro_option.email_domain = "";
+  mashiro_option.email_name = "";
+  mashiro_option.cookie_version_control = "";
+  mashiro_option.qzone_autocomplete = false;
+  mashiro_option.site_name = "さくら荘そのMoshou";
+  mashiro_option.author_name = "Moshou";
+  mashiro_option.site_url = "";
+  mashiro_option.v_appId = "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz";
+  mashiro_option.v_appKey = "mgOpfzbkHYqU92CV4IDlAUHQ";
+  mashiro_option.mathjax = "0";
+  mashiro_option.qq_api_url = "https://api.mashiro.top/qqinfo/"; 
+  mashiro_option.qq_avatar_api_url = "https://api.mashiro.top/qqinfo/";
+
+  // mashiro_option.jsdelivr_css_src = "https://cdn.jsdelivr.net/gh/moezx/cdn@3.4.5/css/lib.min.css";
+  // mashiro_option.float_player_on = true;
+
+  /*End of Initial Variables*/
+  </script>
+  <script type="text/javascript">
+  var bg = "https://s2.ax1x.com/2020/01/13/lHmawj.jpg,https://s2.ax1x.com/2020/01/13/lHm1Yt.jpg,https://s2.ax1x.com/2020/01/13/lHuHdH.jpg,https://s2.ax1x.com/2020/01/13/lHuXWt.jpg,https://s2.ax1x.com/2020/01/13/lHuxQf.jpg,https://s2.ax1x.com/2020/01/13/lHKSOS.jpg".split(",");
+  var bgindex = Math.floor(Math.random()*bg.length);
+  if (!!window.ActiveXObject || "ActiveXObject" in window) { //is IE?
+    alert('朋友，IE浏览器未适配哦~');
+  }
+  </script>
+  <style type="text/css">
+  .hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}
+  </style>
+  <style type="text/css">.site-top .lower nav{display:block !important;}.author-profile i,.post-like a,.post-share .show-share,.sub-text,.we-info a,span.sitename,.post-more i:hover,#pagination a:hover,.post-content a:hover,.float-content i:hover{color:#FE9600}.feature i,.download,.navigator i:hover,.links ul li:before,.ar-time i,span.ar-circle,.object,.comment .comment-reply-link,.siren-checkbox-radio:checked + .siren-checkbox-radioInput:after{background:#FE9600}::-webkit-scrollbar-thumb{background:#FE9600}.download,.navigator i:hover,.link-title,.links ul li:hover,#pagination a:hover,.comment-respond input[type='submit']:hover{border-color:#FE9600}.entry-content a:hover,.site-info a:hover,.comment h4 a,#comments-navi a.prev,#comments-navi a.next,.comment h4 a:hover,.site-top ul li a:hover,.entry-title a:hover,#archives-temp h3,span.page-numbers.current,.sorry li a:hover,.site-title a:hover,i.iconfont.js-toggle-search.iconsearch:hover,.comment-respond input[type='submit']:hover{color:#FE9600}.comments .comments-main{display:block !important;}.comments .comments-hidden{display:none !important;}background-position:center center;background-attachment:inherit;}
+  </style>
+</head>
+</html>
+<body class="page-template page-template-user page-template-page-analytics page-template-userpage-analytics-php page page-id-1297 chinese-font serif isWebKit">
+  <div class="scrollbar" id="bar">
+  </div>
+  <a href="#" class="cd-top faa-float animated"></a>
+  <section id="main-container">
+    <div class="headertop filter-dot">
+  <div id="banner_wave_1"></div>
+  <div id="banner_wave_2"></div>
+  <figure id="centerbg" class="centerbg">
+    <div class="focusinfo no-select">
+      <div class="header-tou">
+        <a href="">
+          <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+        </a>
+      </div>
+      <div class="header-info">
+        <p>三流的代码，一流的bug!</p>
+        <div class="top-social_v2">
+          <li id="bg-pre">
+            <img class="flipx" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+          
+            
+              
+                <li>
+                  <a href="" target="_blank" class="social-github" title="github">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/github.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://weibo.com/u/5708109003" target="_blank" class="social-github" title="sina">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/sina.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="https://music.163.com/#/user/home?id=251175368" target="_blank" class="social-github" title="wangyiyun">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wangyiyun.png">
+                  </a>
+                </li>
+              
+            
+              
+                <li>
+                  <a href="" target="_blank" class="social-github" title="email">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/email.svg">
+                  </a>
+                </li>
+              
+            
+              
+                <li class="wechat">
+                  <a href="/#">
+                    <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/social/wechat.png">
+                  </a>
+                  <div class="wechatInner">
+                    <img src="https://s2.ax1x.com/2020/01/16/lxZuUU.jpg">
+                  </div>
+                </li>
+              
+            
+          
+          <li id="bg-next">
+            <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/next-b.svg">
+          </li>
+        </div>
+      </div>
+    </div>
+  </figure>
+  <div id="video-container" style="">
+    <video style="object-fit: fill" id="bgvideo" class="video" video-name="" src="" width="auto" preload="auto">
+    </video>
+    <div id="video-btn" class="loadvideo videolive">
+    </div>
+    <div id="video-add">
+    </div>
+    <div class="video-stu">
+    </div>
+  </div>
+  <div class="headertop-down faa-float animated" onclick="headertop_down()">
+    <span>
+      <i class="fa fa-chevron-down" aria-hidden="true">
+      </i>
+    </span>
+  </div>
+</div>
+    <div id="page" class="site wrapper">
+      <header class="site-header no-select gizle sabit" role="banner">
+  <div class="site-top">
+    <div class="site-branding">
+      <span class="site-title">
+        <span class="logolink moe-mashiro">
+          <a href="/">
+            <span class="sakurasono">さくら荘その</span>
+            <span class="shironeko">Moshou</span>
+          </a>
+        </span>
+      </span>
+    </div>
+    <div class="searchbox search-form-submit">
+      <i class="iconfont js-toggle-search iconsearch icon-search">
+      </i>
+    </div>
+    <div id="show-nav" class="showNav mobile-fit">
+      <div class="line line1">
+      </div>
+      <div class="line line2">
+      </div>
+      <div class="line line3">
+      </div>
+    </div>
+    <div class="lower-cantiner">
+      <div class="lower">
+        <nav class="mobile-fit-control hide">
+          <ul id="menu-new" class="menu">
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+                    首页
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+                    归档
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/categories/技术/">
+                          <i class="fa fa-code" aria-hidden="true"></i>
+                          技术
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/生活/">
+                          <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                          生活
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/资源/">
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                          资源
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/随想/">
+                          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                          随想
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/categories/转载/">
+                          <i class="fa fa-book" aria-hidden="true"></i>
+                          转载
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="javascript:;">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+                    清单
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/tags/悦读/">
+                          <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                          书单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/bangumi/">
+                          <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                          番组
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/music/">
+                          <i class="fa fa-headphones" aria-hidden="true"></i>
+                          歌单
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/tags/图集/">
+                          <i class="fa fa-photo" aria-hidden="true"></i>
+                          图集
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+              <li>
+                <a href="/comment/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+                    留言板
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/links/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+                    友人帐
+                  </span>
+                </a>
+                
+              </li>
+            
+              <li>
+                <a href="/">
+                  <span class="faa-parent animated-hover">
+                    <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+                    关于
+                  </span>
+                </a>
+                
+                  <ul class="sub-menu">
+                    
+                      <li>
+                        <a href="/about/">
+                          <i class="fa fa-meetup" aria-hidden="true"></i>
+                          我？
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/theme-sakura/">
+                          <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                          主题
+                        </a>
+                      </li>
+                    
+                      <li>
+                        <a href="/lab/">
+                          <i class="fa fa-cogs" aria-hidden="true"></i>
+                          Lab
+                        </a>
+                      </li>
+                    
+                  </ul>
+                
+              </li>
+            
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+<div class="pattern-center-blank"></div>
+
+  <div class="pattern-center single-center">
+    <!-- 有配图默认渲染第一张 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://s2.ax1x.com/2020/02/05/1s0Pqf.jpg);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/02/05/1s0Pqf.jpg">
+    </div>
+    <header class="pattern-header single-header">
+      <h1 class="entry-title">
+      bilibi部分Api接口整理</h1>
+      <p class="entry-census">
+        <span>
+          <a href="">
+            <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+          </a>
+        </span>
+        <span>
+          <a href=""></a>
+        </span>
+        <span class="bull">
+        ·</span>
+        2019-11-8<span class="bull">
+        ·</span>
+      <span id="busuanzi_value_page_pv"></span>次阅读</p>
+    </header>
+  </div>
+
+<div id="content" class="site-content">
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main" role="main">
+      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+        <div class="toc"></div>
+        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
+        
+        <div class="entry-content">
+          <h2 id="bilibi部分Api接口整理"><a href="#bilibi部分Api接口整理" class="headerlink" title="bilibi部分Api接口整理"></a>bilibi部分Api接口整理</h2><blockquote>
+<p>偶然的机会发现哔哩哔哩很早之前暴露过一次api，虽然后来哔哩哔哩官方整改过，但是还是留下了一些api，本着对哔哩哔哩的兴趣，打算把部分api整理出来，后期利用这些api做一个React Native的小项目。</p>
+<p>整理的过程是真的困难，从github以及别的项目源码中，还要结合抓包工具，以及appkey，和sign的破解弄得头大。</p>
+</blockquote>
+<h5 id="两个哔哩哔哩接口网站"><a href="#两个哔哩哔哩接口网站" class="headerlink" title="两个哔哩哔哩接口网站"></a>两个哔哩哔哩接口网站</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/lovelyyoshino/Bilibili-Live-API</span><br><span class="line">https://github.com/fython/BilibiliAPIDocs</span><br></pre></td></tr></table></figure>
+
+<h5 id="appkey可以二选一"><a href="#appkey可以二选一" class="headerlink" title="appkey可以二选一"></a>appkey可以二选一</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">appkey:1d8b6e7d45233436</span><br><span class="line">appkey:c1b107428d337928</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-首页推荐-每次10条"><a href="#1-首页推荐-每次10条" class="headerlink" title="1 首页推荐 每次10条"></a>1 首页推荐 每次10条</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://app.bilibili.com/x/feed/index?appkey=1d8b6e7d45233436&amp;build=508000&amp;login_event=0&amp;mobi_app=android</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-首页热们视频-idx是offset，默认每次返回10条"><a href="#2-首页热们视频-idx是offset，默认每次返回10条" class="headerlink" title="2 首页热们视频(idx是offset，默认每次返回10条)"></a>2 首页热们视频(idx是offset，默认每次返回10条)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://app.bilibili.com/x/v2/show/popular/index?build=5470400&amp;mobi_app=android&amp;idx=10</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-推荐页轮播图"><a href="#3-推荐页轮播图" class="headerlink" title="3 推荐页轮播图"></a>3 推荐页轮播图</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.bilibili.com/x/web-show/res/loc?pf=7&amp;id=1695</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-视频详情-破解版，信息更多"><a href="#4-视频详情-破解版，信息更多" class="headerlink" title="4 视频详情(破解版，信息更多)"></a>4 视频详情(破解版，信息更多)</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:<span class="comment">//comment.bilibili.com/recommendnew,id//相关推荐视频</span></span><br><span class="line">http:<span class="comment">//api.bilibili.cn/view?id=51639674&amp;appkey=1d8b6e7d45233436 //普通版 aid是哔哩哔哩av号，是上一级参数中的param</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> &lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://static.hdslb.com/js/md5.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//视频详情(破解版）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_sign</span>(<span class="params">params, key</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> s_keys = [];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> params) &#123;</span><br><span class="line">                s_keys.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            s_keys.sort();</span><br><span class="line">            <span class="keyword">var</span> data = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s_keys.length; i++) &#123;</span><br><span class="line">                <span class="comment">// encodeURIComponent 返回的转义数字必须为大写( 如 %2F )</span></span><br><span class="line">                data += (data ? <span class="string">"&amp;"</span> : <span class="string">""</span>) + s_keys[i] + <span class="string">"="</span> + 			      		     <span class="built_in">encodeURIComponent</span>(params[s_keys[i]]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="string">"sign"</span>: hex_md5(data + key),</span><br><span class="line">                <span class="string">"params"</span>: data</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> paramsObj = &#123;</span><br><span class="line">            aid: <span class="string">"78126101"</span>, <span class="comment">//aid是哔哩哔哩av号，是上一级参数中的param</span></span><br><span class="line">            appkey: <span class="string">"1d8b6e7d45233436"</span>,</span><br><span class="line">            build: <span class="string">"5480400"</span>,</span><br><span class="line">            ts: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> appserct = <span class="string">"560c52ccd288fed045859ed18bffd973"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> signObj = get_sign(paramsObj, appserct);</span><br><span class="line">        <span class="built_in">console</span>.log(signObj);</span><br><span class="line">        <span class="keyword">let</span> path = <span class="string">"https://app.bilibili.com/x/v2/view"</span>;</span><br><span class="line">        <span class="keyword">let</span> data = signObj.params;</span><br><span class="line">        <span class="keyword">let</span> sign = signObj.sign;</span><br><span class="line">        <span class="keyword">let</span> url = <span class="string">`<span class="subst">$&#123;path&#125;</span>?<span class="subst">$&#123;data&#125;</span>&amp;sign=<span class="subst">$&#123;sign&#125;</span>`</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(url);<span class="comment">//详情页的url接口</span></span><br><span class="line"><span class="comment">//使用https://motrix.app/软件 测试base_url是否能下载</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="5-热搜词列表-2选1，建议1"><a href="#5-热搜词列表-2选1，建议1" class="headerlink" title="5 热搜词列表(2选1，建议1)"></a>5 热搜词列表(2选1，建议1)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://app.bilibili.com/x/v2/search/hot?build=5370000&amp;limit=10  //limit 返回的条数</span><br><span class="line">https://s.search.bilibili.com/main/hotword</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-搜索时推荐关键字"><a href="#6-搜索时推荐关键字" class="headerlink" title="6 搜索时推荐关键字"></a>6 搜索时推荐关键字</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://api.bilibili.cn/suggest?term=哔哩哔哩  //term参数 搜索时的关键字</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-搜索结果列表-pn为第几页-ps为页的数据"><a href="#7-搜索结果列表-pn为第几页-ps为页的数据" class="headerlink" title="7 搜索结果列表(pn为第几页,ps为页的数据)"></a>7 搜索结果列表(pn为第几页,ps为页的数据)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">https://app.bilibili.com/x/v2/search?appkey=1d8b6e7d45233436&amp;build=5370000&amp;pn=1&amp;ps=15&amp;keyword=&amp;order=</span><br><span class="line">	//order排序方式说明：</span><br><span class="line">	//default：综合排序 </span><br><span class="line">	//pubdate：按发布日期倒序排序</span><br><span class="line">	//senddate：按修改日期倒序排序</span><br><span class="line">	//damku：按弹幕数从高至低排序</span><br><span class="line">	//click：按点击从高至低排序</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-会员购列表-每次请求会刷新"><a href="#8-会员购列表-每次请求会刷新" class="headerlink" title="8 会员购列表(每次请求会刷新)"></a>8 会员购列表(每次请求会刷新)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mall.bilibili.com/mall-c/home/index/v2?mVersion=17</span><br></pre></td></tr></table></figure>
+
+<h5 id="9-视频评论-三选一，建议选一"><a href="#9-视频评论-三选一，建议选一" class="headerlink" title="9 视频评论(三选一，建议选一)"></a>9 视频评论(三选一，建议选一)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://api.bilibili.com/x/v2/reply?type=1&amp;oid=51639674&amp;pn=5&amp;ps=10//（pn为第几页,ps为页的数据）</span><br><span class="line">https://api.bilibili.com/x/v2/reply?jsonp=jsonp&amp;type=1&amp;oid=51639674</span><br></pre></td></tr></table></figure>
+
+<h5 id="10-频道列表-别人解析过的-返回数据中的tid应该会有用吧"><a href="#10-频道列表-别人解析过的-返回数据中的tid应该会有用吧" class="headerlink" title="10 频道列表(别人解析过的,返回数据中的tid应该会有用吧)"></a>10 频道列表(别人解析过的,返回数据中的tid应该会有用吧)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;https://app.bilibili.com/x/channel/square?appkey=1d8b6e7d45233436&amp;build=5370000&amp;channel=huawei&amp;login_event=1&amp;mobi_app=android&amp;platform=android&amp;ts=1557534415&amp;sign=1f43ef46c4bf2d4d738ab7af0f809b3d&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="11-视频播放解析"><a href="#11-视频播放解析" class="headerlink" title="11 视频播放解析"></a>11 视频播放解析</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//v1版本 返回flv格式 进度条audio标签可能不可以控制（后验证react-native-video可以控制拖动）</span></span><br><span class="line"><span class="comment">//将data的参数拆分成v2的vedioParamsObj格式 然后操作同v2</span></span><br><span class="line"><span class="comment">//qn 参数为清晰度 qn=32 是720p  qn=64 是1080p </span></span><br><span class="line">	    <span class="keyword">let</span> appserctV2 = <span class="string">"aHRmhWMLkdeMuILqORnYZocwMBpMEOdt"</span>;</span><br><span class="line">        <span class="keyword">let</span> vedioParamsObjV2 = &#123;</span><br><span class="line">            appkey: <span class="string">"iVGUTjsxvpLeuDCf"</span>,</span><br><span class="line">            build: <span class="string">"500001"</span>,</span><br><span class="line">            buvid: <span class="string">"C0928256-085D-4722-A38F-2E343710C8B3155817infoc"</span>,</span><br><span class="line">            cid: <span class="string">"133673197"</span>,</span><br><span class="line">            device: <span class="string">"android"</span>,</span><br><span class="line">            otype: <span class="string">"json"</span>,</span><br><span class="line">            platform: <span class="string">"android"</span>,</span><br><span class="line">            qn: <span class="string">'64'</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> vedioSignObjV2 = get_sign(vedioParamsObjV2, appserctV2);</span><br><span class="line">        <span class="built_in">console</span>.log(vedioSignObj);</span><br><span class="line">        <span class="keyword">let</span> vedioPathV2 = <span class="string">"https://app.bilibili.com/playurl"</span>;</span><br><span class="line">        <span class="keyword">let</span> vedioV2Data = vedioSignObjV2.params;</span><br><span class="line">        <span class="keyword">let</span> vedioV2Sign = vedioSignObjV2.sign;</span><br><span class="line">        <span class="keyword">let</span> vedioV2Url = <span class="string">`<span class="subst">$&#123;vedioPathV2&#125;</span>?<span class="subst">$&#123;vedioV2Data&#125;</span>&amp;sign=<span class="subst">$&#123;vedioV2Sign&#125;</span>`</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(vedioV2Url);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//v2版本 音频和视频的文件分开，做进度条拖动比较麻烦</span></span><br><span class="line"> &lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"http://static.hdslb.com/js/md5.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_sign</span>(<span class="params">params, key</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> s_keys = [];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> params) &#123;</span><br><span class="line">                s_keys.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            s_keys.sort();</span><br><span class="line">            <span class="keyword">var</span> data = <span class="string">""</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; s_keys.length; i++) &#123;</span><br><span class="line">                <span class="comment">// encodeURIComponent 返回的转义数字必须为大写( 如 %2F )</span></span><br><span class="line">                data += (data ? <span class="string">"&amp;"</span> : <span class="string">""</span>) + s_keys[i] + <span class="string">"="</span> + <span class="built_in">encodeURIComponent</span>(params[s_keys[i]]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> &#123;</span><br><span class="line">                <span class="string">"sign"</span>: hex_md5(data + key),</span><br><span class="line">                <span class="string">"params"</span>: data</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> vedioParamsObj = &#123;</span><br><span class="line">            actionkey: <span class="string">"appkey"</span>,</span><br><span class="line">            aid: <span class="string">"78126101"</span>,</span><br><span class="line">            appkey: <span class="string">"iVGUTjsxvpLeuDCf"</span>,</span><br><span class="line">            build: <span class="string">"5480400"</span>,</span><br><span class="line">            buvid: <span class="string">"XZF9F55FE566C57599024A397F5F160E74DBE"</span>,</span><br><span class="line">            cid: <span class="string">"133673197"</span>,</span><br><span class="line">            device: <span class="string">"android"</span>,</span><br><span class="line">            expire: <span class="number">0</span>,</span><br><span class="line">            fnval: <span class="number">16</span>,</span><br><span class="line">            fnver: <span class="number">0</span>,</span><br><span class="line">            force_host: <span class="number">0</span>,</span><br><span class="line">            fourk: <span class="number">0</span>,</span><br><span class="line">            from_spmid: <span class="string">"tm.recommend.0.0"</span>,</span><br><span class="line">            mid: <span class="number">0</span>,</span><br><span class="line">            mobi_app: <span class="string">"android"</span>,</span><br><span class="line">            otype: <span class="string">"json"</span>,</span><br><span class="line">            qn: <span class="number">64</span>,</span><br><span class="line">            spmid: <span class="string">"main.ugc-video-detail.0.0"</span>,</span><br><span class="line">            ts: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> vedioAppserct = <span class="string">"aHRmhWMLkdeMuILqORnYZocwMBpMEOdt"</span></span><br><span class="line">        <span class="keyword">let</span> vedioSignObj = get_sign(vedioParamsObj, vedioAppserct);</span><br><span class="line">        <span class="built_in">console</span>.log(vedioSignObj);</span><br><span class="line">        <span class="keyword">let</span> vedioPath = <span class="string">"https://app.bilibili.com/x/playurl"</span>;</span><br><span class="line">        <span class="keyword">let</span> vedioData = vedioSignObj.params;</span><br><span class="line">        <span class="keyword">let</span> vedioSign = vedioSignObj.sign;</span><br><span class="line">        <span class="keyword">let</span> vedioUrl = <span class="string">`<span class="subst">$&#123;vedioPath&#125;</span>?<span class="subst">$&#123;vedioData&#125;</span>&amp;sign=<span class="subst">$&#123;vedioSign&#125;</span>`</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(vedioUrl);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>react-native中 npm install –save react-native-video插件，将返回的数据中的baseurl 放入即可</p>
+<p>具体操作访问<a href="https://blog.csdn.net/yeputi1015/article/details/82964314" target="_blank" rel="noopener">https://blog.csdn.net/yeputi1015/article/details/82964314</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import Video from &apos;react-native-video&apos;;</span><br><span class="line"></span><br><span class="line">//V2方式解析 视频音频分开 （url会根据时间跟新，所以下面的不一定能用）</span><br><span class="line">let adressV2 = &quot;http://27.221.127.9/upgcxcode/97/31/133673197/133673197-1-31090.m4s?expires=1575733800&amp;platform=android&amp;ssig=x9UvHgh8gmEpkI9S4Ds87w&amp;oi=989069014&amp;trid=81501fdc0efd411bb7892a757d489946u&amp;nfc=1&amp;nfb=maPYqpoel5MI3qOUX6YpRA==&amp;mid=0&quot;;</span><br><span class="line"></span><br><span class="line">//v1方式解析 有视频和音频</span><br><span class="line">let adressV1 =&quot;http://upos-hz-mirrorhw.acgvideo.com/upgcxcode/97/31/133673197/133673197_nb2-1-64.flv?e=ig8euxZM2rNcNbNahwdVhoMg7zdVhwdEto8g5X10ugNcXBlqNCNEto8g5gNvNE3DN0B5tZlqNxTEto8BTrNvN05fqx6S5ahE9IMvXBvE2ENvNCImNEVEK9GVqJIwqa80WXIekXRE9IB5QK==&amp;deadline=1576136875&amp;gen=playurl&amp;nbs=1&amp;oi=3737122042&amp;os=hw&amp;platform=android&amp;trid=2d2bad64398648bdbe4a16bba9e0774c&amp;uipk=5&amp;upsig=76034536ffedda65074af6147bb76b5d&amp;uparams=e,deadline,gen,nbs,oi,os,platform,trid,uipk&amp;mid=0&quot;</span><br><span class="line"></span><br><span class="line">  &lt;Video source=&#123;&#123; uri: adressV1 &#125;&#125;   // Can be a URL or a local file.</span><br><span class="line">            ref=&#123;(ref) =&gt; &#123;</span><br><span class="line">              // this.player = ref</span><br><span class="line">            &#125;&#125;                                      // Store reference</span><br><span class="line">            // onBuffer=&#123;this.onBuffer&#125;                // Callback when remote video is 												  //	buffering</span><br><span class="line">            // onError=&#123;this.videoError&#125;               // Callback when video cannot be 												  //loaded</span><br><span class="line">            style=&#123;styles.backgroundVideo&#125; /&gt;</span><br><span class="line">        &lt;/View&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>js中可以尝试flv.js(哔哩哔哩官方的视频播放器 github可下载)</p>
+</li>
+</ul>
+<h5 id="12-直播首页-platform可以为ios或者android，推荐android"><a href="#12-直播首页-platform可以为ios或者android，推荐android" class="headerlink" title="12 直播首页(platform可以为ios或者android，推荐android)"></a>12 直播首页(platform可以为ios或者android，推荐android)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v2/AppIndex/getAllList?device=phone&amp;platform=ios&amp;scale=3</span><br></pre></td></tr></table></figure>
+
+<h5 id="13-推荐直播"><a href="#13-推荐直播" class="headerlink" title="13 推荐直播"></a>13 推荐直播</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v1/AppIndex/getAllList?device=android&amp;platform=android&amp;scale=xhdpi</span><br></pre></td></tr></table></figure>
+
+<h5 id="14-直播分类图标"><a href="#14-直播分类图标" class="headerlink" title="14 直播分类图标"></a>14 直播分类图标</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v1/AppIndex/getAreas?device=phone&amp;platform=ios&amp;scale=3&amp;build=1000</span><br></pre></td></tr></table></figure>
+
+<h5 id="15-直播url地址-！"><a href="#15-直播url地址-！" class="headerlink" title="15 直播url地址(！)"></a>15 直播url地址(！)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v1/Room/playUrl?build=5470400&amp;device=android&amp;cid=8643223  //cid为上一级的roomid</span><br></pre></td></tr></table></figure>
+
+<h5 id="16-直播信息-3选1，建议3"><a href="#16-直播信息-3选1，建议3" class="headerlink" title="16 直播信息(3选1，建议3)"></a>16 直播信息(3选1，建议3)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v1/Room/get_info?id=$roomid</span><br><span class="line"></span><br><span class="line">https://api.live.bilibili.com/room/v1/Room/get_info?device=phone&amp;platform=ios&amp;scale=3&amp;build=10000&amp;room_id=</span><br><span class="line"></span><br><span class="line">https://api.live.bilibili.com/xlive/web-room/v1/index/getInfoByRoom?room_id=3971680</span><br></pre></td></tr></table></figure>
+
+<h5 id="17-直播房间列表"><a href="#17-直播房间列表" class="headerlink" title="17 直播房间列表"></a>17 直播房间列表</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">https://api.live.bilibili.com/room/v3/area/getRoomList</span><br><span class="line">//对应首页每项的点击查看更多后的页面</span><br><span class="line">//parent_area_id	GET	int	[0-6] （1-6对应区号，0为全站）</span><br><span class="line">//page	GET	int	页数</span><br><span class="line">//page_size	GET	int	[1-99] 每页显示数量</span><br><span class="line">//sort_type	GET	string	online</span><br></pre></td></tr></table></figure>
+
+<h5 id="18-番剧推荐"><a href="#18-番剧推荐" class="headerlink" title="18 番剧推荐"></a>18 番剧推荐</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">http://bangumi.bilibili.com/api/get_season_by_tag?build=425000&amp;mobi_app=android&amp;page=2&amp;pagesize=8&amp;platform=android&amp;tag_id=109&amp;ts=1473084707000</span><br><span class="line"></span><br><span class="line">//tag_id=109 最新194 应该是每个季度的动漫</span><br><span class="line">//以下参数先尝试 不一定有效</span><br><span class="line">btype	false	int	番剧类型 2:二次元新番 3:三次元新番 默认:所有</span><br><span class="line">weekday	false	int	周日:0 周一:1 周二:2 周三:3 依此类推</span><br></pre></td></tr></table></figure>
+
+<h5 id="19-全区排行-这之后的接口不一定能用"><a href="#19-全区排行-这之后的接口不一定能用" class="headerlink" title="19 全区排行 //这之后的接口不一定能用"></a>19 全区排行 //这之后的接口不一定能用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://api.bilibili.com/pgc/web/rank/list?day=3&amp;season_type=5 </span><br><span class="line">//1-5 对应番剧 影视 电视剧等</span><br><span class="line">//day 3 或者 7  表示最近3日或最近一周的排行</span><br></pre></td></tr></table></figure>
+
+<h5 id="20连载动画"><a href="#20连载动画" class="headerlink" title="20连载动画"></a>20连载动画</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//ps 返回条数</span><br><span class="line">https://api.bilibili.com/x/web-interface/dynamic/region?ps=20&amp;rid=33 //连载动画 </span><br><span class="line">https://api.bilibili.com/x/web-interface/dynamic/region?ps=20&amp;rid=32 //完结动画 </span><br><span class="line">https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&amp;rid=51 //动画资讯</span><br><span class="line">https://api.bilibili.com/x/web-interface/dynamic/region?ps=15&amp;rid=152 //官方延伸</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><h5 id="1直播页面一些图片资源"><a href="#1直播页面一些图片资源" class="headerlink" title="1直播页面一些图片资源"></a>1直播页面一些图片资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/vc/dcfb14f14ec83e503147a262e7607858b05d7ac0.png&quot;,</span><br><span class="line">          &quot;英雄联盟&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/vc/c666c6dc2d5346e0d3cfda7162914d84d16964dd.png&quot;,</span><br><span class="line">          &quot;lol云顶之弈&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/vc/8f7134aa4942b544c4630be3e042f013cc778ea2.png&quot;,</span><br><span class="line">          &quot;王者荣耀&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/live/8fd5339dac84ec34e72f707f4c3b665d0aa41905.png&quot;,</span><br><span class="line">            &quot;娱乐&quot; </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/live/827033eb0ac50db3d9f849abe8e39a5d3b1ecd53.png&quot;,</span><br><span class="line">            &quot;单机&quot;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/live/a7adae1f7571a97f51d60f685823acc610d00a7e.png&quot;,</span><br><span class="line">            &quot;电台&quot;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/vc/9bfde767eae7769bcaf9156d3a7c4df86632bd03.png&quot;,</span><br><span class="line">            &quot;怪物猎人:世界&quot; </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/vc/973d2fe12c771207d49f6dff1440f73d153aa2b2.png&quot;,</span><br><span class="line">            &quot;无主之地3&quot;  </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/vc/976be38da68267cab88f92f0ed78e057995798d6.png&quot;,</span><br><span class="line">            &quot;第五人格&quot;</span><br><span class="line"> &quot;https://i0.hdslb.com/bfs/vc/ff03528785fc8c91491d79e440398484811d6d87.png&quot;,</span><br><span class="line">            &quot;全部标签&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-70周年轮播图资源"><a href="#2-70周年轮播图资源" class="headerlink" title="2  70周年轮播图资源"></a>2  70周年轮播图资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/archive/fc523c90d05bade49143294262a3a297da2a5d55.jpg&quot;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/77da52bb418a4d7f959805d68779cc677c0cb71c.jpg&quot;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/02127e444fd82aab723c7747f57d5c903c602605.jpg&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-70周年静态视频页面"><a href="#3-70周年静态视频页面" class="headerlink" title="3  70周年静态视频页面"></a>3  70周年静态视频页面</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> 70年背景图资源&quot;http://i0.hdslb.com/bfs/archive/2e92d79c8a2a5a87f0d91ab1d493d09f5c1b2ec6.jpg&quot;,</span><br><span class="line"> </span><br><span class="line">&#123;</span><br><span class="line">&quot;15500607&quot;,</span><br><span class="line">&quot;http://i1.hdslb.com/bfs/archive/69b341351180227d90b54cd61297177b643642c5.jpg&quot;,</span><br><span class="line">&quot;91岁仍坚守方桌，剪艺宗师袁秀莹与她的剪纸人生&quot;,</span><br><span class="line">&quot;趣味科普人文&quot;,</span><br><span class="line">&quot;4.6万&quot;,</span><br><span class="line">&quot;163&quot;,</span><br><span class="line">&quot;3:23&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">&quot;10146180&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/0baf3c2bc01200caecffdefd1eb9908d474aa4ac.jpg&quot;,</span><br><span class="line">&quot;被称为中国三宝之一的它，却不及日本，面临失传&quot;,</span><br><span class="line">&quot;趣味科普人文&quot;,</span><br><span class="line">&quot;14.4万&quot;,</span><br><span class="line">&quot;296&quot;,</span><br><span class="line">&quot;4:17&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">&quot;13963830&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/2356a444ee4dd26bb830fe834dd3d1dddb4af955.jpg&quot;,</span><br><span class="line">&quot;从一根青竹变成一摞纸，都发生了什么？&quot;,</span><br><span class="line">&quot;趣味科普人文&quot;,</span><br><span class="line">&quot;9万&quot;,</span><br><span class="line">&quot;546&quot;,</span><br><span class="line">&quot;3:02&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">&quot;15902489&quot;,</span><br><span class="line">&quot;http://i2.hdslb.com/bfs/archive/2d21750c9cd9a3707c583a98e4a8fff3000c1c3e.jpg&quot;,</span><br><span class="line">&quot;他用编竹子的手艺，编出了年收108亿的传奇&quot;,</span><br><span class="line">&quot;趣味科普人文&quot;,</span><br><span class="line">&quot;7.1万&quot;,</span><br><span class="line">&quot;362&quot;,</span><br><span class="line">&quot;4:25&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-70周年静态资源"><a href="#4-70周年静态资源" class="headerlink" title="4  70周年静态资源"></a>4  70周年静态资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;http://i1.hdslb.com/bfs/archive/685562c7df25a391723490d36354fd1440c0e2d4.jpg&quot;,</span><br><span class="line">&quot;68129825&quot;,</span><br><span class="line">&quot;外交高手”大熊猫：为国卖萌，应该的&quot;,</span><br><span class="line">&quot;9968&quot;,</span><br><span class="line">&quot;412&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/ee5829877e348ca9b69e7fb88dd72e3925514dce.jpg&quot;,</span><br><span class="line">&quot;68098480&quot;,</span><br><span class="line">&quot;黄河亮了！“人民红”点亮黄河沿岸 向祖国表白&quot;,</span><br><span class="line">&quot;2381&quot;,</span><br><span class="line">&quot;259&quot;</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">&quot;http://i2.hdslb.com/bfs/archive/05d92363b590b1bf013dd6f9d3377d16e5557740.png&quot;,</span><br><span class="line">&quot;3924328&quot;,</span><br><span class="line">&quot;我在故宫修文物（2016）&quot;,</span><br><span class="line">&quot;532.4万&quot;,</span><br><span class="line">&quot;10万&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-追番轮播图静态资源"><a href="#5-追番轮播图静态资源" class="headerlink" title="5 追番轮播图静态资源"></a>5 追番轮播图静态资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/a085f60bda7f18226accf3993b328e17f419c00d.jpg&quot;,</span><br><span class="line">&quot;FGO动画专题页&quot;  </span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/8c39135d5191acbe0f0108ede3dbc76b6342cd36.jpg&quot;,</span><br><span class="line">&quot;少女前线 人形小剧场：第9话&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/105c45fa8538c897e85e44f3811eda2de2d79b85.jpg&quot;,</span><br><span class="line">&quot;风起绿林&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/20429c37693f67e5310f3b4d02f96c2b7403a6ec.jpg&quot;,</span><br><span class="line">&quot;【一周资讯】第37期&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-追番图标资源"><a href="#6-追番图标资源" class="headerlink" title="6 追番图标资源"></a>6 追番图标资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/125ba229db0dcc3b5a9fe110ba3f4984ddc2c775.png&quot;,</span><br><span class="line">&quot;番剧&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/2c782d7a8127d0de8667321d4071eebff01ea977.png&quot;,</span><br><span class="line">&quot;国创&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/7a7d9db1911b7cbfdad44ae953dd5acc49ef5187.png&quot;,</span><br><span class="line">&quot;时间表&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/76c03a7ca20815765c7f5bc17d320e0676e15a20.png&quot;,</span><br><span class="line">&quot;索引&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/e713a764f9146b73673ba9b126d963aa50f4fc3b.png&quot;,</span><br><span class="line">&quot;热门榜单&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-追番-番剧推荐静态资源-以下自行改成json文件-4个一组，可做换一换功能，也可以自己通过抓包网站获取封面"><a href="#7-追番-番剧推荐静态资源-以下自行改成json文件-4个一组，可做换一换功能，也可以自己通过抓包网站获取封面" class="headerlink" title="7 追番 番剧推荐静态资源(以下自行改成json文件)(4个一组，可做换一换功能，也可以自己通过抓包网站获取封面)"></a>7 追番 番剧推荐静态资源(以下自行改成json文件)(4个一组，可做换一换功能，也可以自己通过抓包网站获取封面)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&quot;猎兽神兵&quot;, &quot;全12话&quot;, &quot;会员抢先&quot;, &quot;69.1万追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/81385f895a48a1c27a0e701218781908fb9d5dd2.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;鬼灭之刃&quot;, &quot;更新至第24话&quot;, &quot;会员抢先&quot;, &quot;476.9万追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/efc989798673c8c374cad6e2b4fc555a8f0f3c2c.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;女高中生的虚度日常&quot;, &quot;更新至第11话&quot;, &quot;会员抢先&quot;, &quot;171.1万追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/1c277223735cfe18a32f8130855a20c1a699f706.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;某科学的一方通行&quot;, &quot;更新至第10话&quot;, &quot;会员抢先&quot;, &quot;217.2万追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/def29a30113e96248830b2a984c8feb6749252f4.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;爱书的下克上：为了成为图书管理员不择手段！&quot;,&quot;更新至第10话&quot;,&quot;会员抢先&quot;,&quot;36万追番&quot;</span><br><span class="line">&quot;https://i2.hdslb.com/bfs/archive/b6e413bef190422a10f6c5da448b29bafc272509.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;喜欢本大爷的竟然就你一个？&quot;,&quot;更新至第9.5话&quot;,&quot;会员抢先&quot;,&quot; 159.9万追番&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/6a40cf23518888c0aa5346ba9ca659771463d2df.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;碧蓝航线&quot;,&quot;更新至第9话&quot;,&quot;会员抢先&quot;,&quot;116.8万追番&quot;</span><br><span class="line">&quot;https://i1.hdslb.com/bfs/archive/ba2cb324e57b917e2bd46794540203ff76a7ba52.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;刺客守则&quot;,&quot;全12话&quot;,&quot;会员抢先&quot;,&quot;114.6万追番&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/e7a0b9d006fe345dabd0fffe45e636a27bba7be9.jpg&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-追番-国创推荐静态资源-4个一组，可做换一换功能"><a href="#8-追番-国创推荐静态资源-4个一组，可做换一换功能" class="headerlink" title="8 追番 国创推荐静态资源(4个一组，可做换一换功能)"></a>8 追番 国创推荐静态资源(4个一组，可做换一换功能)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&quot;画江湖之不良人 第三季&quot;, &quot;更新至第36话&quot;, &quot;会员抢先&quot;, &quot;132.8万系列追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/ad8fe0bbc56b951a57e02142b79b4e9e7137b2e3.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;阴阳师·平安物语&quot;, &quot;全12话&quot;, &quot;会员抢先&quot;, &quot;140.8万系列追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/2e2198e297e98fe77b007710a3cefa9683e31898.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;我家大师兄脑子有坑 特别篇&quot;, &quot;更新至第48话&quot;, &quot;会员抢先&quot;, &quot;196.8万系列追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/55cd9010e59c310b3ccf6281b4ec57bf44967054.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;更新至第9话&quot;, &quot;斩兽之刃&quot;, &quot;会员抢先&quot;, &quot;43.9万系列追番&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/archive/148be0d6209c7a7538998467f50dae3c6f21f322.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;更新至第6话&quot;，&quot;伍六七之最强发现师&quot;，&quot;会员抢先&quot;，&quot;526.1万系列追番&quot;，</span><br><span class="line">&quot;https://i1.hdslb.com/bfs/archive/5ac5302075abf6bc7ba0efe076f6050499ea3715.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;更新至第9话&quot;,&quot;少女前线 人形小剧场&quot;,&quot;会员抢先&quot;,&quot;48.1万系列追番&quot;</span><br><span class="line">&quot;https://i2.hdslb.com/bfs/archive/6a3fcb2d057598b03883762205b8d5723a73e2d0.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;全12话&quot;,&quot;餐桌上的世说新语&quot;,&quot;&quot;,&quot;18.4万系列追番&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/7c481c3b86e2a2c3729e6d47419d83888473b0bd.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;更新至第3话&quot;,&quot;驸马不要啊 动态漫 第三季&quot;,&quot;国创连载中&quot;,&quot;2.1万系列追番&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/e8044696aabbdfaad302980cc27aedc374c5a74e.jpg&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="9-影视轮播资源"><a href="#9-影视轮播资源" class="headerlink" title="9 影视轮播资源"></a>9 影视轮播资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/6a11174b96970c2239f9f5064c57e59af70171a6.jpg&quot;,</span><br><span class="line">&quot;吴青峰：怼粉这种事，都是靠灵感&quot;</span><br><span class="line">            </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/4c58a6e3d6c9901251250ee4ef9ff5696e3c1db0.jpg&quot;,</span><br><span class="line">&quot;中国千年的礼乐智慧&quot;</span><br><span class="line">            </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/98182d952ce44c6d378be97264e7bda0b0fd4c88.jpg&quot;,</span><br><span class="line">&quot;一群有能力、有怪癖又可爱的退休警察们&quot;</span><br><span class="line">            </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/923bfb36c57cd643afb6a6c48594695372ff4a72.jpg&quot;,</span><br><span class="line">&quot;破解冻土难题，改写国际预言&quot;</span><br><span class="line">            </span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/5afd0231d665fd2ee29c376c292a8b3f0203384b.jpg&quot;,</span><br><span class="line">&quot;实拍战机空中机油~&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="10-影视图标"><a href="#10-影视图标" class="headerlink" title="10 影视图标"></a>10 影视图标</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/85e80d8bb430e76eb3e55bbf93d8a62a51e2a774.png&quot;,</span><br><span class="line">&quot;纪录片&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/a1901aedc680a77c808787cb2cf8e22c7b9c359b.png&quot;,</span><br><span class="line">&quot;电影&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/21bd3247c745e3f1eb489bf637215f8cc8aa86ca.png&quot;,</span><br><span class="line">&quot;电视剧&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/76c03a7ca20815765c7f5bc17d320e0676e15a20.png&quot;,</span><br><span class="line">&quot;索引&quot;</span><br><span class="line"></span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/e713a764f9146b73673ba9b126d963aa50f4fc3b.png&quot;,</span><br><span class="line">&quot;热门榜单&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="11-纪录片热播资源"><a href="#11-纪录片热播资源" class="headerlink" title="11 纪录片热播资源"></a>11 纪录片热播资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&quot;守护解放西&quot;, &quot;9月14日，警动全城&quot;, &quot;14.2万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/29e7ea9cf0a619618841caeca1a61032e4f0a2c6.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;真实的残酷宫斗&quot;,&quot;亨利八世6位皇后&quot;,&quot;&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/5a95404be7ecacc69167c3eb5e4d3b5383bef25b.png&quot;</span><br><span class="line"></span><br><span class="line">&quot;人生一串2&quot;, &quot;上串开吃！&quot;,&quot;限时免费&quot;,&quot;236.4万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/7db272b2e887bb3615a8aee29cf4ed839dc54e82.png&quot;</span><br><span class="line"></span><br><span class="line">&quot;糟糕的历史&quot;,&quot;最魔性历史纪录片&quot;,&quot;22.6万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/f3091de24e5ff374ae3920513fecce70a63dc039.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;FOX的北极之旅&quot;,&quot;感受北欧极致壮美&quot;,&quot;&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/2a2b86986e3e4fcb183f0a282c439bc5f130e9e6.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;我们该玩电子游戏吗&quot;,&quot;游戏有助身心健康？&quot;,&quot;26.2万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/acda1d7fd8565706b5fd0cb9c0f7b40813467fcc.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;【纪录】中国古建筑 (2012)&quot;,&quot;中国古建筑之“大势&quot;,&quot;21.1万系列追剧&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/ad068ea233ef0f4e43158bac020a92c9bd0724dc.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;未至之境（英配版）&quot;,&quot;一起探索无人之境&quot;,&quot;31.8万系列追剧&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/ffd662bc2eb4959574180187155c80b4a1a087be.png&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="12电影热播资源"><a href="#12电影热播资源" class="headerlink" title="12电影热播资源"></a>12电影热播资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&quot;哈利·波特与死亡圣器(下)&quot;, &quot;终极之战打响&quot;, &quot;71万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/abcafcf95a0853f709d735f10561b993d0fc05bd.jpg&quot;,</span><br><span class="line">badge: &quot;会员专享&quot;</span><br><span class="line"></span><br><span class="line">&quot;哈利·波特与死亡圣器(上)&quot;, &quot;三人组寻找魂器&quot;, &quot;71万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/d435abc79671d66ce826eea03911b3d3074d27b7.jpg&quot;,</span><br><span class="line">badge: &quot;会员专享&quot;</span><br><span class="line"></span><br><span class="line">&quot;蜘蛛侠：英雄远征&quot;, &quot;小蜘蛛登陆B站！&quot;, &quot;14.6万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/37ecc29ada354bc61b9e237203fff3f4f358f731.jpg&quot;,</span><br><span class="line">badge: &quot;会员半价&quot;</span><br><span class="line"></span><br><span class="line">&quot;罗生门&quot;, &quot;黑泽明经典悬疑神作&quot;, &quot;2.6万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/9050447827d4c7fd88f6a8c536b84e3a0e1b6912.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;我想吃掉你的胰脏&quot;, &quot;免费首播！&quot;, &quot;73.6万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/fd5891a000ecdf6e76fdfea1fc204776f728c9ba.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;东京物语&quot;, &quot;东京真的太远了&quot;, &quot;9992追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/42af0d04487472725d24ff3bfa01a347f87e7248.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;毒战&quot;,&quot;【古天乐/孙红雷】&quot;,&quot;2.8万追剧&quot;</span><br><span class="line">&quot;https://i0.hdslb.com/bfs/archive/9ca6b32956a8abbcae1cb9db17ddaa71509446f8.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;怦然心动&quot;,&quot;重温心动初恋&quot;,13.2万追剧&quot;</span><br><span class="line">&quot;https://i1.hdslb.com/bfs/archive/94b509c59ceb8ad29f47fa39630367b860e96d48.jpg&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="13-电视剧热播资源"><a href="#13-电视剧热播资源" class="headerlink" title="13 电视剧热播资源"></a>13 电视剧热播资源</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&quot;大恋爱&quot;, &quot;和喜欢的人一起吃饭&quot;, &quot;1.9万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/29e7ea9cf0a619618841caeca1a61032e4f0a2c6.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;万福&quot;, &quot;你醒啦&quot;, &quot;1.3万追剧&quot;</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/4c6748f24b0cee23fe71d387a820e7b1e651ccb3.jpg&quot;,</span><br><span class="line">&quot;会员抢先&quot;</span><br><span class="line"></span><br><span class="line">&quot;双姝 第二季&quot;,</span><br><span class="line">&quot;即将上线&quot;,</span><br><span class="line">&quot;15.6万系列追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/5c104fc023c5a6f9b6f59cd83d276a8c86f4d21d.jpg&quot;</span><br><span class="line"></span><br><span class="line">&quot;警察之家&quot;, &quot;是兔子还是螃蟹&quot;, &quot;9520追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/2bf8fb89f3a386e37e08556d89842590655f3647.png&quot;,</span><br><span class="line">&quot;会员抢先&quot;</span><br><span class="line"></span><br><span class="line">&quot;警察之家&quot;, &quot;是兔子还是螃蟹&quot;, &quot;9520追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/2bf8fb89f3a386e37e08556d89842590655f3647.png&quot;,</span><br><span class="line">&quot;会员抢先&quot;</span><br><span class="line"></span><br><span class="line">&quot;萤之光 第一季&quot;, &quot;情侣同款睡姿&quot;, &quot;4.9万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/4a28a26cf87a1f9f4c5a5392b3c69a2f39d64a5c.jpg&quot;,</span><br><span class="line">&quot;限时免费&quot;</span><br><span class="line"></span><br><span class="line">&quot;原以为命中注定的恋爱&quot;, &quot;不会发生在我身上&quot;, &quot;1.6万追剧&quot;,</span><br><span class="line">&quot;http://i0.hdslb.com/bfs/bangumi/9c6401a78ee23cadb7c8338af517e0b1be489535.jpg&quot;,</span><br><span class="line">&quot;会员专享&quot;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        <!-- .entry-content -->
+        <div class="single-reward">
+          <div class="reward-open">赏
+            <div class="reward-main">
+              <ul class="reward-row">
+                <li class="alipay-code"><img src=""></li>
+                <li class="wechat-code"><img src=""></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
+        <footer class="post-footer">
+          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
+          <div class="post-tags">
+          </div>
+          <div class="post-share">
+            <div class="social-share sharehidden share-component"></div>
+            <i class="iconfont show-share icon-forward"></i>
+          </div>
+        </footer><!-- .entry-footer -->
+      </article>
+      <!-- #post-## -->
+      <div class="toc" style="background: none;"></div>
+      <section class="post-squares nextprev">
+        
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2019/11/25/React-Native项目问题小结/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/02/05/1scF6H.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://s2.ax1x.com/2020/02/05/1scF6H.jpg">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                React Native项目问题小结</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+        
+          
+            <div class="post-nepre half next">
+          
+            <a href="/2019/07/10/移动端键盘弹出顶起fixed定位问题/" rel="next">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://s2.ax1x.com/2020/02/04/1DBv3n.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://s2.ax1x.com/2020/02/04/1DBv3n.jpg">
+              </div>
+              <span class="label">
+              Next Post</span>
+              <div class="info">
+                <h3>
+                移动端键盘弹出顶起fixed定位问题</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
+      </section>
+      
+<div id="vcomments"></div>
+<script>
+  window.onload = function(){
+      var valine = new Valine();
+      valine.init({
+        el: '#vcomments',
+        appId: "GyC3NzMvd0hT9Yyd2hYIC0MN-gzGzoHsz",
+        appKey: "mgOpfzbkHYqU92CV4IDlAUHQ",
+        path: window.location.pathname,
+        placeholder: "你是我一生只会遇见一次的惊喜 ..."
+      })
+  }
+</script>
+
+      <section class="author-profile">
+        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <a href="" class="profile gravatar"><img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png" itemprop="image" alt="" height="70" width="70"></a>
+          <div class="meta">
+            <span class="title">Author</span>
+            <h3 itemprop="name">
+            <a href="" itemprop="url" rel="author"></a>
+            </h3>
+          </div>
+        </div>
+        <hr>
+        <p><i class="iconfont icon-write"></i>默兽啊moshou</p>
+      </section>
+    </main><!-- #main -->
+  </div><!-- #primary -->
+</div>
+
+
+
+    </div>    
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..."/>
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            // PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+    <!-- <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Moshou<br>
+      powered_by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer> -->
+<footer id="colophon" class="site-footer" role="contentinfo">
+  <div class="site-info">
+    <div class="footertext">
+      <div class="img-preload">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
+        <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
+      </div>
+      <p style="color: #666666;">&copy 2018</p>
+    </div>
+    <div class="footer-device">
+    <p style="font-family: 'Ubuntu', sans-serif;">
+        <span style="color: #b9b9b9;">Theme <a href="https://github.com/honjun/hexo-theme-sakura" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Sakura</a> <i class="iconfont icon-sakura rotating" style="color: #ffc0cb;display:inline-block"></i> by <a href="https://2heng.xin/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Mashiro</a>&<a href="https://www.hojun.cn/" target="_blank" style="color: #b9b9b9;;text-decoration: underline dotted rgba(0, 0, 0, .1);">Hojun</a>, Powered by Hexo, Hosted by Coding Pages</a>
+        </span>
+      </p>
+    </div>
+  </div><!-- .site-info -->
+</footer>
+
+
+
+<!-- <script src="/js/tocbot.js"></script> -->
+<script type="text/javascript" src="/js/lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/InsightSearch.js"></script>
+<script type="text/javascript" src="/js/jquery.fancybox.min.js"></script>
+<script type="text/javascript" src="/js/zoom.min.js"></script>
+<script type="text/javascript" src="/js/sakura-app.js"></script>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine@1.3.4/dist/Valine.min.js'></script>
+<script src="/js/botui.js"></script>
+<!-- 不蒜子 网页计数器 -->
+<script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script> -->
+<script type="text/javascript">
+/* <![CDATA[ */
+if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  var Poi = {"pjax":"1","movies":{"url": "","name":"Unbroken.mp4","live":"close"},"windowheight":"fixed","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+} else {
+  var Poi = {"pjax":"1","movies":{"url": "","name":"Unbroken.mp4","live":"open"},"windowheight":"auto","codelamp":"close","ajaxurl":"","order":"asc","formpostion":"bottom"};
+}
+/* ]]> */
+
+</script>
+<script>
+$(document).ready(function() {
+  if ($(".toc").length > 0 && document.body.clientWidth > 1200) {
+    if ($(".pattern-center").length > 0) { //有图的情况
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -400,
+          scrollSmoothOffset: -85
+      });
+    } else {
+      tocbot.init({
+          // Where to render the table of contents.
+          tocSelector: '.toc', // 放置目录的容器
+          // Where to grab the headings to build the table of contents.
+          contentSelector: '.entry-content', // 正文内容所在
+          // Which headings to grab inside of the contentSelector element.
+          scrollSmooth: true,
+          headingSelector: 'h1, h2, h3, h4, h5', // 需要索引的标题级别
+          headingsOffset: -85,
+          scrollSmoothOffset: -85
+      });
+    }
+    var offsetTop = $('.toc').offset().top - 95;
+    window.onscroll = function() {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+      if (scrollTop >= offsetTop) {
+        $('.toc').addClass('toc-fixed');
+      } else {
+        $('.toc').removeClass('toc-fixed');
+      }
+    }
+  }
+});
+</script>
+
+    <div class="openNav no-select" style="height: 50px;">
+      <div class="iconflat no-select" style="width: 50px; height: 50px;">
+        <div class="icon"></div>
+      </div>
+      <div class="site-branding search-form-submit">
+        <i class="iconfont js-toggle-search iconsearch icon-search"></i>
+      </div>
+    </div>
+  </section>
+  <div id="mo-nav" class="">
+  <div class="m-avatar">
+    <img src="https://s2.ax1x.com/2020/01/13/lHrLz6.png">
+  </div>
+  <p style="text-align: center; color: #333; font-weight: 900; font-family: 'Ubuntu', sans-serif; letter-spacing: 1.5px">さくら荘そのMoshou</p>
+  <p style="text-align: center; word-spacing: 20px;">
+    
+      
+        <a href="https://github.com/Zmoshou" class="fa fa-github" target="_blank" style="color: #333; margin-left:20px"></a>
+      
+        <a href="https://weibo.com/u/5708109003" class="fa fa-weibo" target="_blank" style="color: #dd4b39; margin-left:20px"></a>
+      
+        <a href="https://wpa.qq.com/msgrd?v=3&uin=752625566&site=qq&menu=yes" class="fa fa-qq" target="_blank" style="color: #25c6fe; margin-left:20px"></a>
+      
+    
+  </p>
+  <ul id="menu-new-1" class="menu">
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-fort-awesome faa-shake" aria-hidden="true"></i>
+            首页
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/archives">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-archive faa-shake" aria-hidden="true"></i>
+            归档
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/categories/技术/">
+                  <i class="fa fa-code" aria-hidden="true"></i>
+                  技术
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/生活/">
+                  <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                  生活
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/资源/">
+                  <i class="fa fa-cloud-download" aria-hidden="true"></i>
+                  资源
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/随想/">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                  随想
+                </a>
+              </li>
+            
+              <li>
+                <a href="/categories/转载/">
+                  <i class="fa fa-book" aria-hidden="true"></i>
+                  转载
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="javascript:;">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-list-ul faa-vertical" aria-hidden="true"></i>
+            清单
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/tags/悦读/">
+                  <i class="fa fa-th-list faa-bounce" aria-hidden="true"></i>
+                  书单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/bangumi/">
+                  <i class="fa fa-film faa-vertical" aria-hidden="true"></i>
+                  番组
+                </a>
+              </li>
+            
+              <li>
+                <a href="/music/">
+                  <i class="fa fa-headphones" aria-hidden="true"></i>
+                  歌单
+                </a>
+              </li>
+            
+              <li>
+                <a href="/tags/图集/">
+                  <i class="fa fa-photo" aria-hidden="true"></i>
+                  图集
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+      <li>
+        <a href="/comment/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-pencil-square-o faa-tada" aria-hidden="true"></i>
+            留言板
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/links/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-link faa-shake" aria-hidden="true"></i>
+            友人帐
+          </span>
+        </a>
+        
+      </li>
+    
+      <li>
+        <a href="/">
+          <span class="faa-parent animated-hover">
+            <i class="fa  fa-leaf faa-wrench" aria-hidden="true"></i>
+            关于
+          </span>
+        </a>
+        
+          <ul class="sub-menu">
+            
+              <li>
+                <a href="/about/">
+                  <i class="fa fa-meetup" aria-hidden="true"></i>
+                  我？
+                </a>
+              </li>
+            
+              <li>
+                <a href="/theme-sakura/">
+                  <i class="fa iconfont icon-sakura" aria-hidden="true"></i>
+                  主题
+                </a>
+              </li>
+            
+              <li>
+                <a href="/lab/">
+                  <i class="fa fa-cogs" aria-hidden="true"></i>
+                  Lab
+                </a>
+              </li>
+            
+          </ul>
+        
+      </li>
+    
+  </ul>
+  <p style="text-align: center; font-size: 13px; color: #b9b9b9;">&copy 2019 hexo-sakura</p>
+</div>
+<button onclick="topFunction()" class="mobile-cd-top" id="moblieGoTop" title="Go to top" style="display: none;"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<style>
+  .aplayer .aplayer-lrc {
+    height: 35px;
+  }
+  .aplayer .aplayer-lrc p{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px !important;
+  }
+  .aplayer .aplayer-lrc p.aplayer-lrc-current{
+    color: #FF1493;
+  }
+  .aplayer.aplayer-narrow .aplayer-body{
+    left: -66px !important;
+  }
+  .aplayer.aplayer-fixed .aplayer-lrc {
+    display: none;
+  }
+  .aplayer .aplayer-lrc.aplayer-lrc-hide {
+      display:none !important;
+  }
+  .aplayer.aplayer-fixed .lrc-show {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+  }
+</style>
+<meting-js
+
+    id="2660651585"
+
+    server="netease"
+
+    type="playlist"
+
+    fixed="true"
+
+    autoplay="false"
+
+    loop="all"
+
+    order="random"
+
+    preload="auto"
+
+    volume="0.7"
+
+    mutex="true"
+
+</meting-js>
+<script>
+  $(function(){
+    $('body').on('click', '.aplayer', function(){
+      if($('.aplayer-button').hasClass('aplayer-play')) {
+        $('.aplayer-lrc').removeClass('lrc-show');
+      } else {
+        $('.aplayer-lrc').addClass('lrc-show');
+      }
+    })
+  });
+</script>
+</body>
+</html>
